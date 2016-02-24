@@ -5,6 +5,7 @@ import com.google.maps.GeocodingApi;
 import com.google.maps.model.GeocodingResult;
 
 public class MainService {
+	private static String API_KEY = "AIzaSyALZvDqmZKte0ru1-fekJQE9ekCgovQcYw";
 	/* Google Maps API Setup */
 	// https://developers.google.com/maps/web-services/client-library#maven
 	
@@ -19,7 +20,7 @@ public class MainService {
 	
 	public static void main(String[] args){
 		// Replace the API key below with a valid API key.
-		GeoApiContext context = new GeoApiContext().setApiKey("AIzaSyALZvDqmZKte0ru1-fekJQE9ekCgovQcYw");
+		GeoApiContext context = new GeoApiContext().setApiKey(API_KEY);
 		GeocodingResult[] results = new GeocodingResult[0];
 		try {
 			results = GeocodingApi.geocode(context,
