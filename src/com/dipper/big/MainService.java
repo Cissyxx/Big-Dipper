@@ -4,6 +4,15 @@ import com.google.maps.GeoApiContext;
 import com.google.maps.GeocodingApi;
 import com.google.maps.model.GeocodingResult;
 
+/* Current APIs' set:
+ * -  Google Maps Directions
+ * -  Google Maps Geocoding
+ * 
+ * Want more APIs? Requests being denied by Google? Shoot me a message on Messenger
+ * - Stan C.
+ */
+
+
 public class MainService {
 	private static String API_KEY = "AIzaSyALZvDqmZKte0ru1-fekJQE9ekCgovQcYw";
 	/* Google Maps API Setup */
