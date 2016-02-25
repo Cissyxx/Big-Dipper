@@ -1,0 +1,59 @@
+/*SITE WIDE CSS FORMATTING*/
+/*--------------------------------------------------------------------------------------------------------------------*/
+/*General Page Set Up for our site.  Site wide font and and background image.  Site wide page size.*/
+.container-fluid {
+    background-image:url(footer_lodyas.png);
+    height: 100%;
+    font-family: 'Raleway', sans-serif;
+}
+
+.body {
+    height: 100%
+}
+/*--------------------------------------------------------------------------------------------------------------------*/
+/*Formatting for the site wide navigation bar*/
+.navbar-header {
+    min-width: 100%;
+}
+
+.navbar .navbar-nav {
+    display: inline-block;
+    vertical-align: middle;
+    width: auto;
+}
+
+.navLogo {
+    height: 90px;
+    width: 90px;
+    margin-left: 10px;
+}
+
+.navbarLinks {
+    font-size: 1.6em;
+    padding-right: 10px;
+    margin-right: 15px;
+}
+
+.navbarTab {
+    padding-top: 21px;
+    vertical-align: middle;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: #006dcc;
+}
+
+.navbarButton {
+    margin-right: 25px;
+    vertical-align: middle;
+}
+/*--------------------------------------------------------------------------------------------------------------------*/
+
+
+
+
+
+
+
+
+

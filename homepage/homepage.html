@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    	<title>Big Dipper Homepage</title>
+
+    	<meta charset="UTF-8">
+
+    	<!-- Needed for mobile friendly site ****************************************************************************-->
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+    	<!-- Stylesheets and Font Imports *******************************************************************************-->
+    	<link rel="stylesheet" href="../setup_files/bootstrap.min.css">
+    	<!-- <link rel="stylesheet" href="../setup_files/websiteCSS.css"> -->
+		<link rel="stylesheet" href="../homepage/homepage.css">
+	</head>
+	<body>
+		<div class = "page-header">
+			<h1>Big Dipper </h1>
+		</div>
+
+		<div class = "row">
+			<div class="col-xs-5">
+				<div class = "description">
+					<h3> Enter up to five locations that you want to visit: </h3>
+				</div>
+				<form >
+					<div class="form-group">
+						<label for="exampleInputName2">Location 1.</label>
+						<input type="text" class="form-control" id="loc1" placeholder="Central Park">
+					</div>
+					<div class="form-group">
+						<label for="exampleInputName2">Location 2. </label>
+						<input type="text" class="form-control" id="loc2" placeholder="High Line">
+					</div>
+					<div class="form-group">
+						<label for="exampleInputName2">Location 3. </label>
+						<input type="text" class="form-control" id="loc3" placeholder="Botanic Garden">
+					</div>
+					<div class="form-group">
+						<label for="exampleInputName2">Location 4. </label>
+						<input type="text" class="form-control" id="loc4" placeholder="Time Square">
+					</div>
+						<div class="form-group">
+						<label for="exampleInputName2">Location 5.</label>
+						<input type="text" class="form-control" id="loc5" placeholder="Yankee Stadium">
+					</div>
+					<button type="submit" class="btn btn-default">Submit</button>
+				</form>
+			</div>
+
+			<div class="col-xs-7">
+				<div id="googleMap"></div>
+			</div>
+			 
+		</div>
+
+		</div>
+
+	</body>
+
+<!-- JavaScript and JQuery Imports ******************************************************************************-->
+<!-- <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyALZvDqmZKte0ru1-fekJQE9ekCgovQcYw"></script -->>
+<script src="http://maps.googleapis.com/maps/api/js"></script>
+
+<script type = "text/javascript" src= "map.js"></script>	
+<script type="text/javascript" src="../setup_files/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="../setup_files/bootstrap.min.js"></script>
+</html>
