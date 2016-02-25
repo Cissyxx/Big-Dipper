@@ -7,6 +7,8 @@
 
     	<!-- Needed for mobile friendly site ****************************************************************************-->
     	<meta name="viewport" content="width=device-width, initial-scale=1">
+    	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+
 
     	<!-- Stylesheets and Font Imports *******************************************************************************-->
     	<link rel="stylesheet" href="../setup_files/bootstrap.min.css">
@@ -59,9 +61,12 @@
 	</body>
 
 <!-- JavaScript and JQuery Imports ******************************************************************************-->
-<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyALZvDqmZKte0ru1-fekJQE9ekCgovQcYw"></script>
+<!-- <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyALZvDqmZKte0ru1-fekJQE9ekCgovQcYw"></script> -->
 <!-- <script src="http://maps.googleapis.com/maps/api/js"></script>
  -->
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALZvDqmZKte0ru1-fekJQE9ekCgovQcYw&signed_in=true&callback=initialize">
+    </script>
 <script type = "text/javascript" src= "map.js"></script>	
 <script type="text/javascript" src="../setup_files/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="../setup_files/bootstrap.min.js"></script>
