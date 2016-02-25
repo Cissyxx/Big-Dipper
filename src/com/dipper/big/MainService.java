@@ -14,7 +14,7 @@ import com.google.maps.model.GeocodingResult;
 
 
 public class MainService {
-	private static String API_KEY = "AIzaSyALZvDqmZKte0ru1-fekJQE9ekCgovQcYw";
+	private static String API_KEY = "IzaSyALZvDqmZKte0ru1-fekJQE9ekCgovQcYw";
 	/* Google Maps API Setup */
 	// https://developers.google.com/maps/web-services/client-library#maven
 	
