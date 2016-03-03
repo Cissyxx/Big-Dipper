@@ -5,6 +5,7 @@ function initialize() {
    zoom: 6,
    mapTypeId: google.maps.MapTypeId.ROADMAP
   };
+  var x = document.getElementById("location");
   var map = new google.maps.Map(document.getElementById("googleMap"),
             mapOptions);
   var infoWindow = new google.maps.InfoWindow({map: map});
@@ -18,8 +19,11 @@ function initialize() {
             infoWindow.setPosition(pos);
             infoWindow.setContent('Location found.');
             map.setCenter(pos);
+            x.innerHTML="Latitude: " + position.coords.latitude + 
+    "<br>Longitude: " + position.coords.longitude;
           }, function() {
             handleLocationError(true, infoWindow, map.getCenter());
+            x.innerHTML = "Geolocation is not supported by this browser.";
           });
         } 
     else {

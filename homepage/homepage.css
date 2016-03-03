@@ -35,6 +35,9 @@ body{
 	text-align: center; 
 	text-transform: uppercase; 
 }
+p{
+	font-size: 12px;
+}
 
 .form-group{
 	color: #f8f8f8; 
@@ -67,4 +70,5 @@ div#googleMap{
 	margin: auto;
 	padding:0;
 	position:relative;
+
 }
