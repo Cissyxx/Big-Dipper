@@ -1,7 +1,6 @@
 var pos;
 var map;
-var geocoder;
-// var infowindow = new google.maps.InfoWindow();
+var geocoder ;
 var infowindow;
 var marker;
 function initialize() {
@@ -13,6 +12,8 @@ function initialize() {
   
   map = new google.maps.Map(document.getElementById("googleMap"),
             mapOptions);
+  geocoder =  new google.maps.Geocoder();
+
   if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function(position) {
             pos = {
@@ -22,17 +23,26 @@ function initialize() {
             map.setCenter(pos);
             lat = position.coords.latitude;
             lng = position.coords.longitude;
-            x.innerHTML="Latitude: " + position.coords.latitude + 
-    "<br>Longitude: " + position.coords.longitude;
+
           }, function() {
             handleLocationError(true, infoWindow, map.getCenter());
             
           });
         } 
-    else {
-      // Browser doesn't support Geolocation
-      handleLocationError(false, infoWindow, map.getCenter());
-    }
+  else {
+    // Browser doesn't support Geolocation
+    handleLocationError(false, infoWindow, map.getCenter());
+  }
+  //set all markers visible
+  // var markers = [];//some array;
+  // var bounds = new google.maps.LatLngBounds();
+  // for(i=0;i<markers.length;i++) {
+  //    bounds.extend(markers[i].getPosition());
+  // }
+  // map.setCenter(bounds.getCenter());
+  // console.log(bounds[0], markers);
+  // map.fitBounds(bounds);
+
 }
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 infoWindow.setPosition(pos);
@@ -43,7 +53,6 @@ infoWindow.setContent(browserHasGeolocation ?
 
 function codeLatLng(){
     var latlng = new google.maps.LatLng(pos.lat, pos.lng);
-    geocoder = new google.maps.Geocoder();
     geocoder.geocode({'latLng': latlng}, function(results, status)
     {
         if (status == google.maps.GeocoderStatus.OK)
@@ -73,4 +82,43 @@ function codeLatLng(){
     });
 }
 
-     
+function address(){
+  var a1 = document.getElementById("loc1").value;
+  var a2 = document.getElementById("loc2").value;
+  var a3 = document.getElementById("loc3").value;
+  var a4 = document.getElementById("loc4").value;
+  var a5 = document.getElementById("loc5").value;
+  var addresses = [a1, a2, a3, a4, a5];
+  for (i = 0; i < addresses.length; i++){
+    geocoder.geocode({'address': addresses[i]}, function(results, status){
+      if (status == google.maps.GeocoderStatus.OK)
+        if (addresses[i] !== ""){
+          {
+            if (results[0])
+              {
+                  map.setZoom(11);
+                  marker = new google.maps.Marker(
+                  {
+                      position: results[0].geometry.location,
+                      map: map
+                  });
+                  infowindow = new google.maps.InfoWindow({map: map});
+                  infowindow.setContent("Address: "+ results[0].formatted_address);
+                  infowindow.open(map, marker);
+
+              }
+              else
+              {
+                  alert("No results found");
+              }
+          }
+        }
+          else
+          {
+              alert("Geocoder failed due to: " + status);
+          }
+      });
+  }
+
+
+}
