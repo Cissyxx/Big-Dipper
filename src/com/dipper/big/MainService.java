@@ -11,10 +11,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.google.maps.DirectionsApi;
+import com.google.maps.DirectionsApiRequest;
 import com.google.maps.DistanceMatrixApi;
 import com.google.maps.DistanceMatrixApiRequest;
 import com.google.maps.GeoApiContext;
 import com.google.maps.GeocodingApi;
+import com.google.maps.model.DirectionsResult;
+import com.google.maps.model.DirectionsRoute;
 import com.google.maps.model.DistanceMatrix;
 import com.google.maps.model.DistanceMatrixElement;
 import com.google.maps.model.DistanceMatrixRow;
@@ -267,12 +271,20 @@ public class MainService {
 		
 		//Check if successful
 		if(mtx != null){
-			//printMatrix(mtx);
-			
 			//Search for optimal path
 			List<String> mPath = getOptimalPath(mtx);
 			System.out.println(mPath.toString());
 			
+			DirectionsApiRequest mRequest = DirectionsApi.getDirections(context, mPath.get(0), mPath.get(mPath.size()-1));
+			try {
+				DirectionsResult mResult = mRequest.waypoints(mPath.subList(1, mPath.size()).toArray(new String[mPath.size()-2])).await();
+				
+				/* Do something with results */
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 }
