@@ -43,12 +43,18 @@ function initialize() {
   // console.log(bounds[0], markers);
   // map.fitBounds(bounds);
 
+  var directionsService = new google.maps.DirectionsService;
+  var directionsDisplay = new google.maps.DirectionsRenderer;
+  directionsDisplay.setMap(map);
+  document.getElementById('submit').addEventListener('click', function(){
+  	calculateAndDisplayRoute(directionsService, directionsDisplay);
+  });
 }
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-infoWindow.setPosition(pos);
-infoWindow.setContent(browserHasGeolocation ?
-                      'Error: The Geolocation service failed.' :
-                      'Error: Your browser doesn\'t support geolocation.');
+	infoWindow.setPosition(pos);
+	infoWindow.setContent(browserHasGeolocation ?
+	                      'Error: The Geolocation service failed.' :
+                      		'Error: Your browser doesn\'t support geolocation.');
 }
 
 function codeLatLng(){
@@ -82,43 +88,73 @@ function codeLatLng(){
     });
 }
 
-function address(){
-  var a1 = document.getElementById("loc1").value;
-  var a2 = document.getElementById("loc2").value;
-  var a3 = document.getElementById("loc3").value;
-  var a4 = document.getElementById("loc4").value;
-  var a5 = document.getElementById("loc5").value;
-  var addresses = [a1, a2, a3, a4, a5];
-  for (i = 0; i < addresses.length; i++){
-    geocoder.geocode({'address': addresses[i]}, function(results, status){
-      if (status == google.maps.GeocoderStatus.OK)
-        if (addresses[i] !== ""){
-          {
-            if (results[0])
-              {
-                  map.setZoom(11);
-                  marker = new google.maps.Marker(
-                  {
-                      position: results[0].geometry.location,
-                      map: map
-                  });
-                  infowindow = new google.maps.InfoWindow({map: map});
-                  infowindow.setContent("Address: "+ results[0].formatted_address);
-                  infowindow.open(map, marker);
+// function address(){
+//   var a1 = document.getElementById("loc1").value;
+//   var a2 = document.getElementById("loc2").value;
+//   var a3 = document.getElementById("loc3").value;
+//   var a4 = document.getElementById("loc4").value;
+//   var a5 = document.getElementById("loc5").value;
+//   var addresses = [a1, a2, a3, a4, a5];
+//   for (i = 0; i < addresses.length; i++){
+//     geocoder.geocode({'address': addresses[i]}, function(results, status){
+//       if (status == google.maps.GeocoderStatus.OK)
+//         if (addresses[i] !== ""){
+//           {
+//             if (results[0])
+//               {
+//                   map.setZoom(11);
+//                   marker = new google.maps.Marker(
+//                   {
+//                       position: results[0].geometry.location,
+//                       map: map
+//                   });
+//                   infowindow = new google.maps.InfoWindow({map: map});
+//                   infowindow.setContent("Address: "+ results[0].formatted_address);
+//                   infowindow.open(map, marker);
 
-              }
-              else
-              {
-                  alert("No results found");
-              }
-          }
-        }
-          else
-          {
-              alert("Geocoder failed due to: " + status);
-          }
-      });
-  }
+//               }
+//               else
+//               {
+//                   alert("No results found");
+//               }
+//           }
+//         }
+//           else
+//           {
+//               alert("Geocoder failed due to: " + status);
+//           }
+//       });
+//   }
+// }
 
+function calculateAndDisplayRoute(directionsService, directionsDisplay){
+	var waypts = [];
+	var checkboxArray = [ "Coney Island", "Brooklyn Botanic Garden", "Central Park", "Harlem"];
+	for (var i = 1; i < checkboxArray.length - 1; i++){
+		waypts.push({
+			location: checkboxArray[i],
+			stopover:true
+		});
+	}
+	directionsService.route({
+		origin: checkboxArray[0],
+		destination: checkboxArray[checkboxArray.length-1],
+		waypoints: waypts,
+		// optimizeWaypoints: true,
+		travelMode: google.maps.TravelMode.DRIVING
+	}, function(response, status){
+		if(status === google.maps.DirectionsStatus.OK){
+			directionsDisplay.setDirections(response);
+			// var route = response.routes[0];
 
+		}
+		else{
+			window.alert('Directions request failed due to ' + status);
+		}
+	});
 }
+
+// $.get('myservlet', function(data)){
+// 	data = "HI";
+// 	$('#data').innerHTML(data);
+// });
