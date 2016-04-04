@@ -77,14 +77,14 @@ public class MainTest {
 	public void generateCombinationTest(){
 		printCombinations(5,1);
 		printCombinations(5,2);
-		printCombinations(5,3);
-		printCombinations(5,4);
-		printCombinations(5,5);
-		
-		printPickyCombinations(5,1,2);
-		printPickyCombinations(5,1,1);
-		printPickyCombinations(5,2,2);
-		printPickyCombinations(5,2,1);
+//		printCombinations(5,3);
+//		printCombinations(5,4);
+//		printCombinations(5,5);
+//		
+//		printPickyCombinations(5,1,2);
+//		printPickyCombinations(5,1,1);
+//		printPickyCombinations(5,2,2);
+//		printPickyCombinations(5,2,1);
 	}
 	
 	private void printCombinations(int n, int k){
