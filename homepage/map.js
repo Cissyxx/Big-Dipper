@@ -3,6 +3,7 @@ var map;
 var geocoder ;
 var infowindow;
 var marker;
+
 function initialize() {
   var mapOptions = {
    center: new google.maps.LatLng(42.730787,-73.682488),
@@ -87,7 +88,12 @@ function codeLatLng(){
         }
     });
 }
-
+var a1 = document.getElementById("loc1").value;
+var a2 = document.getElementById("loc2").value;
+var a3 = document.getElementById("loc3").value;
+var a4 = document.getElementById("loc4").value;
+var a5 = document.getElementById("loc5").value;
+var listofLocations = {loc1: a1, loc2: a2, loc3: a3, loc4: a4, loc5: a5};
 // function address(){
 //   var a1 = document.getElementById("loc1").value;
 //   var a2 = document.getElementById("loc2").value;
