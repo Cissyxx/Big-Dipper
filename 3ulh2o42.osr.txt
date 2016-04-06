@@ -1,0 +1,13 @@
+﻿
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch dev
+# Changes to be committed:
+#	modified:   .classpath
+#	modified:   .settings/org.eclipse.wst.common.project.facet.core.xml
+#	new file:   WebContent/index.jsp
+#	modified:   pom.xml
+#	new file:   src/com/dipper/big/LocationServlet.java
+#	deleted:    src/com/dipper/big/Servelet.java
+#
+
