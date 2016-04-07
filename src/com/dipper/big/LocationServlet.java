@@ -3,6 +3,10 @@ package com.dipper.big;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.LinkedList;
+import java.util.List;
+
+import com.dipper.big.MapManager;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/LocationServlet")
 public class LocationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	public static String API_KEY = "AIzaSyALZvDqmZKte0ru1-fekJQE9ekCgovQcYw";
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -43,7 +47,17 @@ public class LocationServlet extends HttpServlet {
 		out.print(loc3 + " ");
 		out.print(loc4 + " ");
 		out.print(loc5 + " ");
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		MapManager mManager = MapManager.getInstance(API_KEY);
+		List<String> dest = new LinkedList<String>();
+		if(loc1 != null) dest.add(loc1);
+		if(loc2 != null) dest.add(loc2);
+		if(loc3 != null) dest.add(loc3);
+		if(loc4 != null) dest.add(loc4);
+		if(loc5 != null) dest.add(loc5);
+		
+		out.print(mManager.getOptimalPath(dest).toString());
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**

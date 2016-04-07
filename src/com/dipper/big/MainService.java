@@ -2,6 +2,7 @@ package com.dipper.big;
 
 import java.util.LinkedList;
 import java.util.List;
+import com.dipper.big.MapManager;
 
 /* Current APIs' set:
  * -  Google Maps Directions

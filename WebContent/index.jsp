@@ -13,10 +13,10 @@
     	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
 
 
-    	<!-- Stylesheets and Font Imports *******************************************************************************-->
-    	<link rel="stylesheet" href="../setup_files/bootstrap.min.css">
-    	<!-- <link rel="stylesheet" href="../setup_files/websiteCSS.css"> -->
-		<link rel="stylesheet" href="../homepage/homepage.css">
+    	<!-- Stylesheets and Font Imports *******************************************************************************--> 
+    	<link rel="stylesheet" href="./libs/bootstrap.min.css"> 
+    	<!-- <link rel="stylesheet" href="./WEB-INF/lib/websiteCSS.css"> -->
+    	<link rel="stylesheet" href="./stylesheets/homepage.css"> 
 </head>
 <body>
 <div class = "page-header">
@@ -26,13 +26,13 @@
 	<div class = "row">
 		<div class="col-xs-4">
 			<div class = "description">
-				<h3> Enter up to five locations that you want to visit: </h3>
-				<p> <button type="button" class="btn btn-info" onclick = "codeLatLng()">Current Location</button></p>
+				<h3> Enter your current location in the first entry below as the starting point, then enter up to four more locations that you want to visit: </h3>
+				<!-- <p> <button type="button" class="btn btn-info" onclick = "codeLatLng()">Current Location</button></p> -->
 			</div>
 			<form action="LocationServlet" name="loginForm" method="post">>
 				<div class="form-group">
-					<label for="exampleInputName2">Location 1.</label>
-					<input type="text" class="form-control" id="loc1" placeholder="Central Park" name="loc1">
+					<label for="exampleInputName2">Current Location.</label>
+					<input type="text" class="form-control" id="loc1" placeholder="15th Street Troy NY 12180" name="loc1">
 				</div>
 				<div class="form-group">
 					<label for="exampleInputName2">Location 2. </label>
@@ -69,10 +69,12 @@
 
 </body>
 
-<!--script async defer
+<script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALZvDqmZKte0ru1-fekJQE9ekCgovQcYw&signed_in=true&callback=initialize">
 </script>
-<script type = "text/javascript" src= "map.js"></script>	
-<script type="text/javascript" src="../setup_files/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="../setup_files/bootstrap.min.js"></script--->
+ <script type = "text/javascript" src="map.js"></script>	
+<!-- <script type="text/javascript" src="../setup_files/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="../setup_files/bootstrap.min.js"></script> -->
+<!-- <script type="text/javascript" src="./libs/jquery-1.11.3.min.js"></script>  -->
+<script type="text/javascript" src="./libs/bootstrap.min.js"></script>
 </html>

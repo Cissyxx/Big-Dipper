@@ -5,7 +5,7 @@ html{
   	overflow-x: hidden; 
 }
 body{
-	background-image: url("Big_Dipper.jpg");
+	background-image: url("../images/Big_Dipper.jpg");
 	background-size: cover;
 	background-repeat:no-repeat;
     background-position: center center;  
