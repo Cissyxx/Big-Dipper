@@ -39,9 +39,9 @@ public class MainService {
 		mManager = MapManager.getInstance(API_KEY);
 		
 		List<String> destinations = new LinkedList<String>();
-		destinations.add("Central Park");
-		destinations.add("High Line");
-		destinations.add("Brooklyn Botanic Garden");
+		destinations.add("central park");
+		destinations.add("high line");
+		destinations.add("times square");
 		
 		//Grab optimal path
 		System.out.println(mManager.getOptimalPath(destinations).toString());

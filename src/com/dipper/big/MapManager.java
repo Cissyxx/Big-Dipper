@@ -115,7 +115,6 @@ public class MapManager {
 		//System.out.println("Remaining: " + tempSubset);
 		
 		//Find minimal distance 
-		//C(S, j) = min{C(S − {j}, i) + dij : i ∈ S, i ̸= j}
 		Iterator<Integer> i = tempSubset.iterator();
 		while(i.hasNext()){
 			int mCity = i.next();
