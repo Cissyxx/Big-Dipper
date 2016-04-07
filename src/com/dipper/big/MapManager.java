@@ -18,7 +18,10 @@ import com.google.maps.model.DistanceMatrix;
 import com.google.maps.model.DistanceMatrixElement;
 import com.google.maps.model.DistanceMatrixRow;
 
-//Singleton class
+/**
+ * This is a singleton class used in the entire system
+ * It holds the main algorithm to find the optimal path
+ */
 public class MapManager {
 	
 	private static MapManager mManager = new MapManager();
@@ -27,12 +30,23 @@ public class MapManager {
 	
 	private MapManager(){}
 	
-	//Get single instance of MapManager
-	public static MapManager getInstance(final String API_KEY){
+	/**
+	 * Get single instance of MapManager
+	 * @param API_KEY specific API KEY that STAX registered for Google API
+	 * @return updated MapManager
+	 */
+	public static MapManager getInstance(final String API_KEY)
+	{
 		mManager.mContext.setApiKey(API_KEY);
 		return mManager;
 	}
 	
+	/**
+	 * Get distance matrix
+	 * @param mContext provided helper class from Google API
+	 * @param mDestinations list of destination names
+	 * @return distance matrix if not no exception caught
+	 */
 	private static DistanceMatrix getDistanceMatrix(GeoApiContext mContext, List<String> mDestinations){
 		try {
 			//Grab distance matrix
@@ -45,6 +59,13 @@ public class MapManager {
 		return null;
 	}
 	
+	/**
+	 * Generate path combinations
+	 * @param n location from 0 - n
+	 * @param k number of items
+	 * @param index reference to location position
+	 * @return set of destination orders
+	 */
 	private static Set< Set<Integer> > generatePickyCombinations(int n, int k, int index){
 		Set<Set<Integer> > mResult = generateCombinations(n, k);
 		Iterator<Set<Integer>> i = mResult.iterator();
@@ -56,15 +77,26 @@ public class MapManager {
 		return mResult;
 	}
 	
-	//n: 0 - n
-	//k: # of items
+	/**
+	 * Generate different combinations
+	 * @param n location from 0 - n
+	 * @param k number of items
+	 * @return set of destination orders
+	 */
 	private static Set< Set<Integer> > generateCombinations(int n, int k){
 		Set<Set<Integer> > mResult = new HashSet< Set<Integer> >(); 
 		combinationHelper(0, n, k, new HashSet<Integer>(), mResult);
 		return mResult;
 	}
 	
-	//Recursive function
+	/**
+	 * helper function to generate combinations
+	 * @param min minimum distance
+	 * @param max maximum distance
+	 * @param n location from 0 - n
+	 * @param mRecord remaining locations from previous calculation
+	 * @param mResult locations in travel order
+	 */
 	private static void combinationHelper(int min, int max, int n, Set<Integer> mRecord, Set< Set<Integer> > mResult){
 		int minRange = min + 1;
 		if(n == 0){
@@ -78,6 +110,10 @@ public class MapManager {
 		}
 	}
 	
+	/**
+	 * Print matrix
+	 * @param mtx distance matrix obtained from previous functions
+	 */
 	private static void printMatrix(DistanceMatrix mtx){
 		//Check if successful
 		if(mtx != null){
@@ -103,6 +139,15 @@ public class MapManager {
 		}
 	}
 	
+	/**
+	 * Get the minimum distance
+	 * @param mtx distance matrix obtained from previous functions
+	 * @param mDistance stores path length for specific starting location
+	 * @param mPath stores path length for specific starting location and its corresponding path
+	 * @param mSubset locations in travel order
+	 * @param node starting location
+	 * @return
+	 */
 	private static long getMinimalDistance(DistanceMatrix mtx, Map< Set<Integer>, Map<Integer, Long> > mDistance,
 			Map< Set<Integer>, Map<Integer, List<Integer>> > mPath, Set<Integer> mSubset, Integer node){
 		long mResult = Long.MAX_VALUE;
@@ -140,8 +185,11 @@ public class MapManager {
 		return mResult;
 	}
 	
-	//Given a DistanceMatrix mtx, return an ordered list of destinations corresponding to the 
-	//optimal path, where the optimal path consists of each destination exactly once.
+	/**
+	 * Get the optimal path, which consists of each destination exactly once
+	 * @param mtx distance matrix provided by Google API
+	 * @return an ordered list of destinations corresponding to the optimal path,
+	 */
 	private static List<String> getOptimalPath(DistanceMatrix mtx){
 		List<String> mResult = new LinkedList<>();
 		int mSize = mtx.destinationAddresses.length;
@@ -224,7 +272,11 @@ public class MapManager {
 		return mResult;
 	}
 	
-	//Get Best Path given list of destinations
+	/**
+	 * Get the best path
+	 * @param mDestinations list of destinations
+	 * @return list of ordered destinations
+	 */
 	public List<String> getOptimalPath(List<String> mDestinations){
 		
 		//Grab Distance Matrix

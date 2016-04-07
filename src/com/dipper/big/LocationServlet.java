@@ -27,7 +27,6 @@ public class LocationServlet extends HttpServlet {
      */
     public LocationServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
     
     public void init() throws ServletException
@@ -39,9 +38,11 @@ public class LocationServlet extends HttpServlet {
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
     */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
 
         String loc1, loc2, loc3, loc4, loc5;
+        
         // get all locations
         loc1 = request.getParameter("loc1");
         loc2 = request.getParameter("loc2");
@@ -49,6 +50,8 @@ public class LocationServlet extends HttpServlet {
         loc4 = request.getParameter("loc4");
         loc5 = request.getParameter("loc5");
         List<String> destinations = new LinkedList<String>();
+        
+        // if the loc have valid values, put them in destination list
         if (loc1 != null && !loc1.isEmpty()) {
             destinations.add(loc1);
         }
@@ -77,14 +80,9 @@ public class LocationServlet extends HttpServlet {
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO Auto-generated method stub
-        doGet(request, response);
-    }
-
-    protected void destory()
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-
+        doGet(request, response);
     }
 
 }
