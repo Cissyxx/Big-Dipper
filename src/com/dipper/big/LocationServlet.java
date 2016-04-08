@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.dipper.big.MapManager;
+import com.google.gson.Gson;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,25 +41,29 @@ public class LocationServlet extends HttpServlet {
 		loc3 = request.getParameter("loc3");
 		loc4 = request.getParameter("loc4");
 		loc5 = request.getParameter("loc5");
-		PrintWriter out = response.getWriter();
-		out.println("Locations are: ");
-		out.println(String.format(" - %s", loc1));
-		out.println(String.format(" - %s", loc2));
-		out.println(String.format(" - %s", loc3));
-		out.println(String.format(" - %s", loc4));
-		out.println(String.format(" - %s", loc5));
+//		out.println("Locations are: ");
+//		out.println(String.format(" - %s", loc1));
+//		out.println(String.format(" - %s", loc2));
+//		out.println(String.format(" - %s", loc3));
+//		out.println(String.format(" - %s", loc4));
+//		out.println(String.format(" - %s", loc5));
 		
 		MapManager mManager = MapManager.getInstance(API_KEY);
 		List<String> dest = new LinkedList<String>();
-		if(loc1 != null) dest.add(loc1);
-		if(loc2 != null) dest.add(loc2);
-		if(loc3 != null) dest.add(loc3);
-		if(loc4 != null) dest.add(loc4);
-		if(loc5 != null) dest.add(loc5);
+		if(loc1 != null && !loc1.isEmpty()) dest.add(loc1);
+		if(loc2 != null && !loc2.isEmpty()) dest.add(loc2);
+		if(loc3 != null && !loc3.isEmpty()) dest.add(loc3);
+		if(loc4 != null && !loc4.isEmpty()) dest.add(loc4);
+		if(loc5 != null && !loc5.isEmpty()) dest.add(loc5);
 		
-		out.println("Optimal Path: ");
-		out.println(mManager.getOptimalPath(dest).toString());
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+
+	    response.setContentType("application/json");
+	    response.setCharacterEncoding("UTF-8");
+	    PrintWriter out = response.getWriter();
+	    String output = new Gson().toJson(mManager.getOptimalPath(dest));
+	    out.write(output);
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**

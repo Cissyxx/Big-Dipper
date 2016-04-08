@@ -128,9 +128,8 @@ function codeLatLng(){
 //   }
 // }
 
-function calculateAndDisplayRoute(directionsService, directionsDisplay){
+function calculateAndDisplayRoute(directionsService, directionsDisplay, checkboxArray){
 	var waypts = [];
-	var checkboxArray = [ "Coney Island", "Brooklyn Botanic Garden", "Central Park", "Harlem"];
 	for (var i = 1; i < checkboxArray.length - 1; i++){
 		waypts.push({
 			location: checkboxArray[i],
