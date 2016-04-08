@@ -12,6 +12,9 @@ import com.dipper.big.MapManager;
  * - Stan C.
  */
 
+/**
+ * Holds path search mechanism to run at only back-end
+ */
 public class MainService {
 	// Replace the API key below with a valid API key.
 	private static String API_KEY = "AIzaSyALZvDqmZKte0ru1-fekJQE9ekCgovQcYw";
@@ -34,14 +37,17 @@ public class MainService {
 	// 		1. https://search.maven.org/#search%7Cga%7C1%7Cgoogle%20maps%20services
 	//		2. Take the latest version, specify it in pom.xml
 	
+	/**
+	 * Add specific locations to perform getOptimalPath in MapManager
+	 */
 	public static void main(String[] args){
 		//Initialization
 		mManager = MapManager.getInstance(API_KEY);
 		
 		List<String> destinations = new LinkedList<String>();
-		destinations.add("Central Park");
-		destinations.add("High Line");
-		destinations.add("Brooklyn Botanic Garden");
+		destinations.add("central park");
+		destinations.add("high line");
+		destinations.add("times square");
 		
 		//Grab optimal path
 		System.out.println(mManager.getOptimalPath(destinations).toString());

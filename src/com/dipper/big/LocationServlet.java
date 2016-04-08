@@ -1,6 +1,5 @@
 package com.dipper.big;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.LinkedList;
@@ -20,16 +19,22 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet("/LocationServlet")
 public class LocationServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-	public static String API_KEY = "AIzaSyALZvDqmZKte0ru1-fekJQE9ekCgovQcYw";
+    private static final long serialVersionUID = 1L;
+    private static String API_KEY = "AIzaSyALZvDqmZKte0ru1-fekJQE9ekCgovQcYw";
+    private static MapManager mManager;
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
     public LocationServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
-
+    
+    public void init() throws ServletException
+    {
+        // initialize mManager
+    	mManager = MapManager.getInstance(API_KEY);
+    }
 	/**	
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
