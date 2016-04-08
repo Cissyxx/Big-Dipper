@@ -49,6 +49,7 @@ function initialize() {
   document.getElementById('submit').addEventListener('click', function(){
   	calculateAndDisplayRoute(directionsService, directionsDisplay);
   });
+  
 }
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 	infoWindow.setPosition(pos);
@@ -163,6 +164,8 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay){
 		}
 	});
 }
+
+
 
 // $.get('myservlet', function(data)){
 // 	data = "HI";

@@ -29,7 +29,7 @@ public class LocationServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
+	/**	
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -41,12 +41,12 @@ public class LocationServlet extends HttpServlet {
 		loc4 = request.getParameter("loc4");
 		loc5 = request.getParameter("loc5");
 		PrintWriter out = response.getWriter();
-		out.print("locations are: ");
-		out.print(loc1 + " ");
-		out.print(loc2 + " ");
-		out.print(loc3 + " ");
-		out.print(loc4 + " ");
-		out.print(loc5 + " ");
+		out.println("Locations are: ");
+		out.println(String.format(" - %s", loc1));
+		out.println(String.format(" - %s", loc2));
+		out.println(String.format(" - %s", loc3));
+		out.println(String.format(" - %s", loc4));
+		out.println(String.format(" - %s", loc5));
 		
 		MapManager mManager = MapManager.getInstance(API_KEY);
 		List<String> dest = new LinkedList<String>();
@@ -56,7 +56,8 @@ public class LocationServlet extends HttpServlet {
 		if(loc4 != null) dest.add(loc4);
 		if(loc5 != null) dest.add(loc5);
 		
-		out.print(mManager.getOptimalPath(dest).toString());
+		out.println("Optimal Path: ");
+		out.println(mManager.getOptimalPath(dest).toString());
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -65,7 +66,18 @@ public class LocationServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		boolean ajax = "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
+
+	    if (ajax) {
+	        // Handle ajax (JSON or XML) response.
+	    	PrintWriter out = response.getWriter();
+	    	out.println("Handled with ajax");
+	    } else {
+	        // Handle regular (JSP) response.
+	    }
 		doGet(request, response);
 	}
+	
+	
 
 }

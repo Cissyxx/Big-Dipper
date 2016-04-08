@@ -17,6 +17,21 @@
     	<link rel="stylesheet" href="./libs/bootstrap.min.css"> 
     	<!-- <link rel="stylesheet" href="./WEB-INF/lib/websiteCSS.css"> -->
     	<link rel="stylesheet" href="./stylesheets/homepage.css"> 
+    	
+    	<script src="./libs/jquery-1.11.3.min.js"></script>
+			
+			<script type="text/javascript">
+$(document).on("submit", "#loginForm", function(event) {
+    var $form = $(this);
+
+    $.post($form.attr("action"), $form.serialize(), function(response) {
+    	 $("#directions").text(response);
+    });
+
+    event.preventDefault(); // Important! Prevents submitting the form.
+});
+</script>
+    	
 </head>
 <body>
 <div class = "page-header">
@@ -51,11 +66,12 @@
 					<input type="text" class="form-control" id="loc5" placeholder="Yankee Stadium" name="loc5">
 				</div>
 				<button type="button" class="btn btn-default" id = 'submit' value="Send">Submit</button>
+				<button type="button" class="btn btn-default" id = 'myajax' onclick="myFunction()" value="Blob">Test Ajax</button>
 				<input type="submit" value="Login">
 				<!-- <button type="button" class="btn btn-default" onclick= "address()">Submit</button> -->
 			</form>
 			<div id = "directions-panel">
-				<h3> Itinerary </h3>
+				<h3 id = "directions"> Itinerary </h3>
 			</div>
 		</div>
 		
@@ -68,6 +84,36 @@
 	</div>
 
 </body>
+
+<script>
+	function myFunction(){
+		
+		//Java Script
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {   // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response text...
+			if (xhttp.readyState == 4 && xhttp.status == 200) {
+				$("#directions").text(xhttp.responseText);           // Locate HTML DOM element with ID "somediv" and set its text content with the response text.
+			    window.alert(xhttp.responseText)
+			}
+		};
+		
+		xhttp.open("POST", "LocationServlet", true);
+		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		xhttp.send("loc1=Seattle&loc2=Miami"); 
+		
+		//JQuery
+		
+		/* $.post("LocationServlet", 
+			{
+		        loc1: "Seattle",
+		        loc2: "New York City"
+		    },
+		    function(responseText) {   // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response text...
+			window.alert(responseText);
+            $("#directions").text(responseText);           // Locate HTML DOM element with ID "somediv" and set its text content with the response text.
+        }); */
+	};
+</script>
 
 <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALZvDqmZKte0ru1-fekJQE9ekCgovQcYw&signed_in=true&callback=initialize">
