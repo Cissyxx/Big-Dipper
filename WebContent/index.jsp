@@ -19,8 +19,8 @@
     	<link rel="stylesheet" href="./stylesheets/homepage.css"> 
     	
     	<script src="./libs/jquery-1.11.3.min.js"></script>
-			
-			<script type="text/javascript">
+		
+		<script type="text/javascript">
 $(document).on("submit", "#loginForm", function(event) {
     var $form = $(this);
 

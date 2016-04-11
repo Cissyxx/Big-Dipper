@@ -17,9 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class LocationServlet
  */
-@WebServlet("/LocationServlet")
+@WebServlet(urlPatterns={"/LocationServlet"})
 public class LocationServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 102831973239L;
     private static String API_KEY = "AIzaSyALZvDqmZKte0ru1-fekJQE9ekCgovQcYw";
     private static MapManager mManager;
        
@@ -82,15 +82,15 @@ public class LocationServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		boolean ajax = "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
-
-	    if (ajax) {
-	        // Handle ajax (JSON or XML) response.
-	    	PrintWriter out = response.getWriter();
-	    	out.println("Handled with ajax");
-	    } else {
-	        // Handle regular (JSP) response.
-	    }
+//		boolean ajax = "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
+//
+//	    if (ajax) {
+//	        // Handle ajax (JSON or XML) response.
+//	    	PrintWriter out = response.getWriter();
+//	    	out.println("Handled with ajax");
+//	    } else {
+//	        // Handle regular (JSP) response.
+//	    }
 		doGet(request, response);
 	}
 	
