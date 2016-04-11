@@ -63,18 +63,16 @@ public class LocationServlet extends HttpServlet {
 		
 		System.out.println(dest.toString());
 		
-		response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        PrintWriter out = response.getWriter();
-        String output = new Gson().toJson(mManager.getOptimalPath(dest));
-        out.write(output);
-		
-		
-//		response.getWriter().write(mManager.getOptimalPath(dest).toString());
-		
-//		out.println("Optimal Path: ");
-//		out.println(mManager.getOptimalPath(dest).toString());
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
+
+	    //response.setContentType("application/json");
+	    //response.setCharacterEncoding("UTF-8");
+	    PrintWriter out = response.getWriter();
+	    String output = new Gson().toJson(mManager.getOptimalPath(dest));
+//	    List<String> result = mManager.getOptimalPath(dest);
+//	    String output = result.toString();
+	    System.out.println(output);
+	    out.write(output);
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -82,15 +80,15 @@ public class LocationServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-//		boolean ajax = "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
-//
-//	    if (ajax) {
-//	        // Handle ajax (JSON or XML) response.
-//	    	PrintWriter out = response.getWriter();
-//	    	out.println("Handled with ajax");
-//	    } else {
-//	        // Handle regular (JSP) response.
-//	    }
+		boolean ajax = "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
+
+	    if (ajax) {
+	        // Handle ajax (JSON or XML) response.
+	    	PrintWriter out = response.getWriter();
+	    	System.out.println("Handled with AJAX");
+	    } else {
+	        // Handle regular (JSP) response.
+	    }
 		doGet(request, response);
 	}
 	

@@ -5,6 +5,10 @@ var infowindow;
 var marker;
 var directionsService;
 var directionsDisplay;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 62bd684e8987fba27dc842e24c35c69cda0a8ea8
 function initialize() {
   var mapOptions = {
    center: new google.maps.LatLng(42.730787,-73.682488),
@@ -49,7 +53,7 @@ function initialize() {
   directionsDisplay = new google.maps.DirectionsRenderer;
   directionsDisplay.setMap(map);
   document.getElementById('submit').addEventListener('click', function(){
-  	calculateAndDisplayRoute(directionsService, directionsDisplay);
+  	//calculateAndDisplayRoute(directionsService, directionsDisplay);
   });
   
 }

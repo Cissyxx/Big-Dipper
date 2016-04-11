@@ -19,6 +19,7 @@
     	<link rel="stylesheet" href="./stylesheets/homepage.css"> 
     	
     	<script src="./libs/jquery-1.11.3.min.js"></script>
+<<<<<<< HEAD
 		
 		<script type="text/javascript">
 $(document).on("submit", "#loginForm", function(event) {
@@ -31,6 +32,8 @@ $(document).on("submit", "#loginForm", function(event) {
     event.preventDefault(); // Important! Prevents submitting the form.
 });
 </script>
+=======
+>>>>>>> 62bd684e8987fba27dc842e24c35c69cda0a8ea8
     	
 </head>
 <body>
@@ -124,12 +127,21 @@ $(document).on("submit", "#loginForm", function(event) {
 // // 		});
 		
 		
-// 		$.post("LocationServlet", $.param(param), function(responseText) {   // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response text...
-// 			window.alert(responseText);
-// 		    console.log("response is " + responseText);
-//             $("#directions").text(responseText[0]);           // Locate HTML DOM element with ID "somediv" and set its text content with the response text.
-//         });
-// 	};
+		//JQuery
+		param = {
+		        loc1: document.getElementsByName('loc1')[0].value,
+		        loc2: document.getElementsByName('loc2')[0].value,
+		        loc3: document.getElementsByName('loc3')[0].value,
+		       	loc4: document.getElementsByName('loc4')[0].value,
+		       	loc5: document.getElementsByName('loc5')[0].value,
+		    };
+		console.log(param);
+		 $.post("LocationServlet", param,
+		    function(responseText) {   // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response text...
+		    var arr = JSON.parse(responseText);
+            //$("#directions").text(responseJson);           // Locate HTML DOM element with ID "somediv" and set its text content with the response text.
+            calculateAndDisplayRoute(arr);
+        }); 
 </script>
 
 <script async defer
