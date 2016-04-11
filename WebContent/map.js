@@ -3,6 +3,8 @@ var map;
 var geocoder ;
 var infowindow;
 var marker;
+var directionsService;
+var directionsDisplay;
 function initialize() {
   var mapOptions = {
    center: new google.maps.LatLng(42.730787,-73.682488),
@@ -43,8 +45,8 @@ function initialize() {
   // console.log(bounds[0], markers);
   // map.fitBounds(bounds);
 
-  var directionsService = new google.maps.DirectionsService;
-  var directionsDisplay = new google.maps.DirectionsRenderer;
+  directionsService = new google.maps.DirectionsService;
+  directionsDisplay = new google.maps.DirectionsRenderer;
   directionsDisplay.setMap(map);
   document.getElementById('submit').addEventListener('click', function(){
   	calculateAndDisplayRoute(directionsService, directionsDisplay);
@@ -128,15 +130,18 @@ function codeLatLng(){
 //   }
 // }
 
-function calculateAndDisplayRoute(directionsService, directionsDisplay){
+function calculateAndDisplayRoute(checkboxArray){
 	var waypts = [];
-	var checkboxArray = [ "Coney Island", "Brooklyn Botanic Garden", "Central Park", "Harlem"];
+	//var checkboxArray = [ "Coney Island", "Brooklyn Botanic Garden", "Central Park", "Harlem"];
 	for (var i = 1; i < checkboxArray.length - 1; i++){
 		waypts.push({
 			location: checkboxArray[i],
 			stopover:true
 		});
 	}
+	
+	window.alert(checkboxArray);
+	
 	directionsService.route({
 		origin: checkboxArray[0],
 		destination: checkboxArray[checkboxArray.length-1],
@@ -148,8 +153,8 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay){
 			directionsDisplay.setDirections(response);
 			var route = response.routes[0];
 			console.log(route);
-			var summaryPanel = document.getElementById('directions-panel');
-            summaryPanel.innerHTML = '';
+			//var summaryPanel = document.getElementById('directions-panel');
+            //summaryPanel.innerHTML = '';
             // for (var i = 0; i < route.legs.length; i++) {
             //   var routeSegment = i + 1;
             //   summaryPanel.innerHTML += '<b>Route Segment: ' + routeSegment +
@@ -164,6 +169,62 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay){
 		}
 	});
 }
+
+$(document).on("click", "#myajax", function(event) {
+	
+//		//Java Script
+//		var xhttp = new XMLHttpRequest();
+//		xhttp.onreadystatechange = function() {   // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response text...
+//			if (xhttp.readyState == 4 && xhttp.status == 200) {
+//				$("#directions").text(xhttp.responseText);           // Locate HTML DOM element with ID "somediv" and set its text content with the response text.
+//			    window.alert(xhttp.responseText)
+//			}
+//		};
+	
+//		xhttp.open("POST", "LocationServlet", true);
+//		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+//		xhttp.send("loc1=Seattle&loc2=Miami"); 
+	
+	//JQuery
+	
+	var param = {
+        loc1: document.getElementsByName("loc1")[0].value,
+        loc2: document.getElementsByName("loc2")[0].value,
+        loc3: document.getElementsByName("loc3")[0].value,
+        loc4: document.getElementsByName("loc4")[0].value,
+        loc5: document.getElementsByName("loc5")[0].value,
+    };
+	
+	console.log(param);
+	
+	$.ajax({
+	    type: 'GET', // it's easier to read GET request parameters
+	    url: 'LocationServlet',
+	    dataType: 'JSON',
+	    data: param,
+	    success: function(responseText) {
+	        
+	        console.log("response is " + responseText);
+
+		    $("#directions").text(responseText);
+		    var arr = $.map(responseText, function(el) { return el; })
+            calculateAndDisplayRoute(responseText);
+	    },
+	    error: function(data) {
+	        window.alert('fail');
+	    }
+	});
+	
+	
+//	$.post("LocationServlet", $.param(param), function(responseText) {   // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response text...
+//		window.alert(responseText);
+//	    console.log("response is " + responseText);
+//        $("#directions").text(responseText[0]);           // Locate HTML DOM element with ID "somediv" and set its text content with the response text.
+//    });
+	
+	event.preventDefault();
+});
+
 
 
 
