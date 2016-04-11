@@ -17,9 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class LocationServlet
  */
-@WebServlet("/LocationServlet")
+@WebServlet(urlPatterns={"/LocationServlet"})
 public class LocationServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 102831973239L;
     private static String API_KEY = "AIzaSyALZvDqmZKte0ru1-fekJQE9ekCgovQcYw";
     private static MapManager mManager;
        
@@ -61,13 +61,22 @@ public class LocationServlet extends HttpServlet {
 		if(loc4 != null && !loc4.isEmpty()) dest.add(loc4);
 		if(loc5 != null && !loc5.isEmpty()) dest.add(loc5);
 		
+		System.out.println("All locations obtained");
 		
 
-	    response.setContentType("application/json");
-	    response.setCharacterEncoding("UTF-8");
-	    PrintWriter out = response.getWriter();
-	    String output = new Gson().toJson(mManager.getOptimalPath(dest));
-	    out.write(output);
+//	    response.setContentType("application/json");
+//	    response.setCharacterEncoding("UTF-8");
+//	    //PrintWriter out = response.getWriter();
+//	    String output = new Gson().toJson(mManager.getOptimalPath(dest));
+//	    //out.write(output);
+//	    System.out.print(output);
+//	    response.getWriter().write(output);
+	    
+	    response.setContentType("text/html");
+	    response.getWriter().print("hello i am servlet");
+	    System.out.println("This is a servlet in java");
+	    
+	    
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -76,15 +85,15 @@ public class LocationServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		boolean ajax = "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
-
-	    if (ajax) {
-	        // Handle ajax (JSON or XML) response.
-	    	PrintWriter out = response.getWriter();
-	    	out.println("Handled with ajax");
-	    } else {
-	        // Handle regular (JSP) response.
-	    }
+//		boolean ajax = "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
+//
+//	    if (ajax) {
+//	        // Handle ajax (JSON or XML) response.
+//	    	PrintWriter out = response.getWriter();
+//	    	out.println("Handled with ajax");
+//	    } else {
+//	        // Handle regular (JSP) response.
+//	    }
 		doGet(request, response);
 	}
 	

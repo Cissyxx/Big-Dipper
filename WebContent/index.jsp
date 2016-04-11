@@ -19,8 +19,8 @@
     	<link rel="stylesheet" href="./stylesheets/homepage.css"> 
     	
     	<script src="./libs/jquery-1.11.3.min.js"></script>
-			
-			<script type="text/javascript">
+		
+		<script type="text/javascript">
 $(document).on("submit", "#loginForm", function(event) {
     var $form = $(this);
 
@@ -81,8 +81,6 @@ $(document).on("submit", "#loginForm", function(event) {
 		 
 	</div>
 
-	</div>
-
 </body>
 
 <script>
@@ -113,9 +111,10 @@ $(document).on("submit", "#loginForm", function(event) {
 		       	loc5: document.getElementsByName('loc5')[0].value,
 		    };
 		console.log(param);
-		 $.post("LocationServlet", param,
+		$("#directions").text(param);
+		$.post("LocationServlet", param,
 		    function(responseJson) {   // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response text...
-			window.alert(responseJson);
+            window.alert(responseJson);
             $("#directions").text(responseJson);           // Locate HTML DOM element with ID "somediv" and set its text content with the response text.
         }); 
 	};
