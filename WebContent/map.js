@@ -50,7 +50,7 @@ function initialize() {
   directionsDisplay = new google.maps.DirectionsRenderer;
   directionsDisplay.setMap(map);
   document.getElementById('submit').addEventListener('click', function(){
-  	calculateAndDisplayRoute(directionsService, directionsDisplay);
+  	//calculateAndDisplayRoute(directionsService, directionsDisplay);
   });
   
 }
@@ -139,8 +139,6 @@ function calculateAndDisplayRoute(checkboxArray){
 			stopover:true
 		});
 	}
-	
-	window.alert(checkboxArray);
 	
 	directionsService.route({
 		origin: checkboxArray[0],
