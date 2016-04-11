@@ -3,6 +3,9 @@ var map;
 var geocoder ;
 var infowindow;
 var marker;
+var directionsService;
+var directionsDisplay;
+
 function initialize() {
   var mapOptions = {
    center: new google.maps.LatLng(42.730787,-73.682488),
@@ -43,8 +46,8 @@ function initialize() {
   // console.log(bounds[0], markers);
   // map.fitBounds(bounds);
 
-  var directionsService = new google.maps.DirectionsService;
-  var directionsDisplay = new google.maps.DirectionsRenderer;
+  directionsService = new google.maps.DirectionsService;
+  directionsDisplay = new google.maps.DirectionsRenderer;
   directionsDisplay.setMap(map);
   document.getElementById('submit').addEventListener('click', function(){
   	calculateAndDisplayRoute(directionsService, directionsDisplay);
@@ -128,7 +131,7 @@ function codeLatLng(){
 //   }
 // }
 
-function calculateAndDisplayRoute(directionsService, directionsDisplay, checkboxArray){
+function calculateAndDisplayRoute(checkboxArray){
 	var waypts = [];
 	for (var i = 1; i < checkboxArray.length - 1; i++){
 		waypts.push({
@@ -136,6 +139,9 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, checkbox
 			stopover:true
 		});
 	}
+	
+	window.alert(checkboxArray);
+	
 	directionsService.route({
 		origin: checkboxArray[0],
 		destination: checkboxArray[checkboxArray.length-1],

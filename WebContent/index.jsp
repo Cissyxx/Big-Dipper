@@ -102,9 +102,14 @@
 		    };
 		console.log(param);
 		 $.post("LocationServlet", param,
-		    function(responseJson) {   // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response text...
-			window.alert(responseJson);
-            $("#directions").text(responseJson);           // Locate HTML DOM element with ID "somediv" and set its text content with the response text.
+		    function(responseText) {   // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response text...
+			window.alert(responseText);
+		    var arr = JSON.parse(responseText);
+			/* var arr = $.map(JSON.parse(responseText), function(el) { return el; });
+			window.alert(arr); */
+            //$("#directions").text(responseJson);           // Locate HTML DOM element with ID "somediv" and set its text content with the response text.
+            /* var result_arr =  $.map(responseText, function(el) { return el }); */
+            calculateAndDisplayRoute(arr);
         }); 
 	};
 </script>

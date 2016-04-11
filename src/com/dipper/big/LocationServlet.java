@@ -63,10 +63,13 @@ public class LocationServlet extends HttpServlet {
 		
 		
 
-	    response.setContentType("application/json");
-	    response.setCharacterEncoding("UTF-8");
+	    //response.setContentType("application/json");
+	    //response.setCharacterEncoding("UTF-8");
 	    PrintWriter out = response.getWriter();
 	    String output = new Gson().toJson(mManager.getOptimalPath(dest));
+//	    List<String> result = mManager.getOptimalPath(dest);
+//	    String output = result.toString();
+	    System.out.println(output);
 	    out.write(output);
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
@@ -81,7 +84,7 @@ public class LocationServlet extends HttpServlet {
 	    if (ajax) {
 	        // Handle ajax (JSON or XML) response.
 	    	PrintWriter out = response.getWriter();
-	    	out.println("Handled with ajax");
+	    	System.out.println("Handled with AJAX");
 	    } else {
 	        // Handle regular (JSP) response.
 	    }
