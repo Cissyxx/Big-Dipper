@@ -37,9 +37,9 @@ public class LocationServlet extends HttpServlet {
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) {
-        String loc1, loc2, loc3, loc4, loc5;
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String currentLoc, loc1, loc2, loc3, loc4, loc5;
+        currentLoc = request.getParameter("current_loc");
         loc1 = request.getParameter("loc1");
         loc2 = request.getParameter("loc2");
         loc3 = request.getParameter("loc3");

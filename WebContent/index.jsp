@@ -73,42 +73,6 @@
     </div>
 
 </body>
-<script>
-	function myFunction(){
-		
-		//Java Script
-		/* var xhttp = new XMLHttpRequest();
-		xhttp.onreadystatechange = function() {   // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response text...
-			if (xhttp.readyState == 4 && xhttp.status == 200) {
-				var tempArray = JSON.parse(xhttp.responseText);
-				$("#directions").text(tempArray);           // Locate HTML DOM element with ID "somediv" and set its text content with the response text.
-				window.alert(tempArray)
-				//calculateAndDisplayRoute(directionsService, directionsDisplay, tempArray){
-			    
-			}
-		};
-		
-		xhttp.open("POST", "LocationServlet", true);
-		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-		xhttp.send("loc1=Seattle&loc2=Miami"); */ 
-		
-		//JQuery
-		param = {
-		        loc1: document.getElementsByName('loc1')[0].value,
-		        loc2: document.getElementsByName('loc2')[0].value,
-		        loc3: document.getElementsByName('loc3')[0].value,
-		       	loc4: document.getElementsByName('loc4')[0].value,
-		       	loc5: document.getElementsByName('loc5')[0].value,
-		    };
-		console.log(param);
-		 $.post("LocationServlet", param,
-		    function(responseText) {   // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response text...
-		    var arr = JSON.parse(responseText);
-            $("#directions").text(responseJson);           // Locate HTML DOM element with ID "somediv" and set its text content with the response text.
-            calculateAndDisplayRoute(arr);
-        }); 
-	};
-</script>
 
 <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALZvDqmZKte0ru1-fekJQE9ekCgovQcYw&signed_in=true&callback=initialize">
