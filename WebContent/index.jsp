@@ -30,8 +30,8 @@
             </div>
             <form name="loginForm">
                 <div class="form-group">
-                    <label for="exampleInputName2">Current Location. (Optional)</label>
-					<p><button type = "button" class = "btn btn-info" onclick = "currentLoc()">Current Location</button></p>
+                    <label for="exampleInputName2">Current Location. </label>
+					<p><button type = "button" class = "btn btn-info" onclick = "codeLatLng()">Current Location</button></p>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputName2">Location 1.</label>

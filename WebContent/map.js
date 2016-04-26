@@ -44,18 +44,14 @@ function initialize() {
 }
 
 
-function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-    infoWindow.setPosition(pos);
-    infoWindow.setContent(browserHasGeolocation ?
-        'Error: The Geolocation service failed.' :
-        'Error: Your browser doesn\'t support geolocation.');
-}
+//function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+//    infoWindow.setPosition(pos);
+//    infoWindow.setContent(browserHasGeolocation ?
+//        'Error: The Geolocation service failed.' :
+//        'Error: Your browser doesn\'t support geolocation.');
+//}
 
-function currentLoc(){
-	infoWindow = new google.maps.InfoWindow({map: map});
-	infoWindow.setPosition(pos);
-    infoWindow.setContent('Current Location found.');
-}
+
 function codeLatLng(){
     var latlng = new google.maps.LatLng(pos.lat, pos.lng);
     geocoder.geocode({'latLng': latlng}, function(results, status)
@@ -70,9 +66,10 @@ function codeLatLng(){
                     position: latlng,
                     map: map
                 });
-                infowindow = new google.maps.InfoWindow({map: map});
-                infowindow.setContent("Address: "+ results[0].formatted_address);
-                infowindow.open(map, marker);
+//                infowindow = new google.maps.InfoWindow({map: map});
+//                infowindow.setContent("Address: "+ results[0].formatted_address);
+//                infowindow.open(map, marker);
+                map.setCenter(pos);
 
             }
             else
@@ -125,7 +122,8 @@ $(document).on("click", "#myajax", function(event) {
         loc3: document.getElementsByName("loc")[2].value,
         loc4: document.getElementsByName("loc")[3].value,
         loc5: document.getElementsByName("loc")[4].value,
-        currentloc: pos
+        lat: pos.lat.toString(),
+        lng: pos.lng.toString()
     };
 
     console.log(param);
