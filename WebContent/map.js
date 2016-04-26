@@ -52,6 +52,13 @@ function initialize() {
 //}
 
 
+function currentLoc(){
+    infoWindow = new google.maps.InfoWindow({map: map});
+    infoWindow.setPosition(pos);
+    infoWindow.setContent('Current Location found.');
+
+}
+
 function codeLatLng(){
     var latlng = new google.maps.LatLng(pos.lat, pos.lng);
     geocoder.geocode({'latLng': latlng}, function(results, status)
@@ -184,5 +191,12 @@ $(document).ready(function(event) {
     }
     // change the website address to homepage
     window.history.pushState('', 'Big Dipper Homepage', '/Big-Dipper/');
+
+    // deactivate get location button for 10 seconds
+    $('.btn-info').attr('disabled', true);
+    setTimeout(function(){
+        $('.btn-info').removeAttr('disabled');
+    }, 10000)
+
     event.preventDefault();
 })
