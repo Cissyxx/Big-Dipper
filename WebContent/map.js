@@ -35,25 +35,10 @@ function initialize() {
     directionsService = new google.maps.DirectionsService;
     directionsDisplay = new google.maps.DirectionsRenderer;
     directionsDisplay.setMap(map);
-    
+
+    // register mailto button event
     document.getElementById('mailTo').addEventListener('click', function() {
         mailToWithAddress();
-        /*var loc = ["", "", "", "", ""];
-        console.log(loc);
-        loc[0] = "loc1=%22"+document.getElementsByName("loc")[0].value.replace(" ", "%20")+"%22";
-        loc[1] = "loc2=%22"+document.getElementsByName("loc")[1].value.replace(" ", "%20")+"%22";
-        loc[2] = "loc3=%22"+document.getElementsByName("loc")[2].value.replace(" ", "%20")+"%22";
-        loc[3] = "loc4=%22"+document.getElementsByName("loc")[3].value.replace(" ", "%20")+"%22";
-        loc[4] = "loc5=%22"+document.getElementsByName("loc")[4].value.replace(" ", "%20")+"%22";
-        console.log("location is " + loc);
-        //this.click(function() {
-            prefex = "mailto:&subject=My%20Itinerary&body=The%20link%20is:";
-            endvar = loc.join("%26");
-            httpAddress = document.location.origin+document.location.pathname+"LocationServlet%3F"+endvar;
-            document.location.href = prefex + httpAddress;
-
-        //});
-        event.preventDefault();*/
     });
 
 }
@@ -165,45 +150,41 @@ $(document).on("click", "#myajax", function(event) {
     event.preventDefault();
 });
 
-//$(document).ready ( function () {
-//    $(document).on ("click", "#mailto", function () {
-//$("#mailto").click(function(event) {
 function mailToWithAddress(event) {
     var loc = ["", "", "", "", ""];
-    console.log(loc);
-    loc[0] = "loc1=%22"+document.getElementsByName("loc")[0].value.replace(" ", "%20")+"%22";
-    loc[1] = "loc2=%22"+document.getElementsByName("loc")[1].value.replace(" ", "%20")+"%22";
-    loc[2] = "loc3=%22"+document.getElementsByName("loc")[2].value.replace(" ", "%20")+"%22";
-    loc[3] = "loc4=%22"+document.getElementsByName("loc")[3].value.replace(" ", "%20")+"%22";
-    loc[4] = "loc5=%22"+document.getElementsByName("loc")[4].value.replace(" ", "%20")+"%22";
-    console.log("location is " + loc);
-    //this.click(function() {
-        prefex = "mailto:&subject=My%20Itinerary&body=The%20link%20is:";
-        endvar = loc.join("%26");
-        httpAddress = document.location.origin+document.location.pathname+"LocationServlet%3F"+endvar;
-        document.location.href = prefex + httpAddress;
+    //console.log(loc);
+    loc[0] = "loc1=%22"+document.getElementById("loc1").value.replace(" ", "%20")+"%22";
+    loc[1] = "loc2=%22"+document.getElementById("loc2").value.replace(" ", "%20")+"%22";
+    loc[2] = "loc3=%22"+document.getElementById("loc3").value.replace(" ", "%20")+"%22";
+    loc[3] = "loc4=%22"+document.getElementById("loc4").value.replace(" ", "%20")+"%22";
+    loc[4] = "loc5=%22"+document.getElementById("loc5").value.replace(" ", "%20")+"%22";
+    //console.log("location is " + loc);
 
-    //});
+    // create mailto link
+    prefex = "mailto:&subject=My%20Itinerary&body=The%20link%20is:";
+    endvar = loc.join("%26");
+    httpAddress = document.location.origin+document.location.pathname+"%3F"+endvar;
+    document.location.href = prefex + httpAddress;
+
     event.preventDefault();
 }
-//})
 
+/**
+ * Reads an address with location information
+ * And auto-fill the input tags with corresponding information
+ */
+$(document).ready(function(event) {
+    var searchContent = window.location.search;
+    if (searchContent != '') {
+        locations = searchContent.split('&');
+        $('#loc1').val(locations[0].split('%22')[1].replace(/%20/g, ' '));
+        $('#loc2').val(locations[1].split('%22')[1].replace(/%20/g, ' '));
+        $('#loc3').val(locations[2].split('%22')[1].replace(/%20/g, ' '));
+        $('#loc4').val(locations[3].split('%22')[1].replace(/%20/g, ' '));
+        $('#loc5').val(locations[4].split('%22')[1].replace(/%20/g, ' '));
 
-//href="mailto:&amp;subject=My%20Itinerary&amp;body=The%20link%20is%20below:http://localhost:8080/Big-Dipper/LocationServlet%3Floc1=%22NYC%22%26loc2=%22Miami,%20FL%22%26loc3=%22Troy,%20NY%22"
-
-
-
-/*
-$(document).on("click", "#mailto", function(event) {
-    var loc1, loc2, loc3, loc4, loc5;
-    loc1 = document.getElementsByName("loc")[0].value,
-    loc2 = document.getElementsByName("loc")[1].value,
-    loc3 = document.getElementsByName("loc")[2].value,
-    loc4 = document.getElementsByName("loc")[3].value,
-    loc5 = document.getElementsByName("loc")[4].value,
-    $("#emailLnk").click(function()
-    {
-        document.location.href = 'mailto:&subject="My%20Itinerary&body="My%20itinerary%20is%20as%20link%20:%20http://localhost:8080/Big-Dipper/LocationServlet?loc1="'+loc1+'"&loc2="'+loc2+'"&loc3="'+loc3+'"&loc4="'+loc4+'"&loc5="'+loc5+'"';
-    });
+    }
+    // change the website address to homepage
+    window.history.pushState('', 'Big Dipper Homepage', '/Big-Dipper/');
     event.preventDefault();
-});*/
+})
