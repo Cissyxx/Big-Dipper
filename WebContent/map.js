@@ -14,7 +14,6 @@ function initialize() {
 
     map = new google.maps.Map(document.getElementById("googleMap"), mapOptions);
     geocoder =  new google.maps.Geocoder();
-
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
             pos = {
@@ -67,6 +66,11 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
         'Error: Your browser doesn\'t support geolocation.');
 }
 
+function currentLoc(){
+	infoWindow = new google.maps.InfoWindow({map: map});
+	infoWindow.setPosition(pos);
+    infoWindow.setContent('Current Location found.');
+}
 function codeLatLng(){
     var latlng = new google.maps.LatLng(pos.lat, pos.lng);
     geocoder.geocode({'latLng': latlng}, function(results, status)
@@ -136,6 +140,7 @@ $(document).on("click", "#myajax", function(event) {
         loc3: document.getElementsByName("loc")[2].value,
         loc4: document.getElementsByName("loc")[3].value,
         loc5: document.getElementsByName("loc")[4].value,
+        currentloc: pos
     };
 
     console.log(param);

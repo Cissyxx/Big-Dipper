@@ -31,7 +31,7 @@
             <form name="loginForm">
                 <div class="form-group">
                     <label for="exampleInputName2">Current Location. (Optional)</label>
-                    <input type="text" class="form-control" id="current_loc" placeholder="15th Street Troy NY 12180" name="loc">
+					<p><button type = "button" class = "btn btn-info" onclick = "currentLoc()">Current Location</button></p>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputName2">Location 1.</label>
@@ -53,7 +53,7 @@
                     <label for="exampleInputName2">Location 5.</label>
                     <input type="text" class="form-control" id="loc5" placeholder="Yankee Stadium" name="loc">
                 </div>
-                <button type="button" class="btn btn-default" id = 'myajax' value="Blob">Test Ajax</button>
+                <button type="button" class="btn btn-default" id = 'myajax' value="Blob">Submit</button>
                 
             </form>
            <div id = "directions-panel">
@@ -73,7 +73,7 @@
 <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALZvDqmZKte0ru1-fekJQE9ekCgovQcYw&signed_in=true&callback=initialize">
 </script>
- <script type = "text/javascript" src="map.js"></script>
+<script type = "text/javascript" src="map.js"></script>
 <!-- <script type="text/javascript" src="../setup_files/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="../setup_files/bootstrap.min.js"></script> -->
 <!-- <script type="text/javascript" src="./libs/jquery-1.11.3.min.js"></script>  -->
