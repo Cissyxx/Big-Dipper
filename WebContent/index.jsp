@@ -55,6 +55,7 @@
             </form>
            <div id = "directions-panel">
                 <h3 id = "directions"> Itinerary </h3>
+                <p><a id = "mail-link" class = "btn btn-primary"> Mail Itinerary </a>
            </div>
         </div>
 
