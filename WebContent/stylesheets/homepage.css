@@ -72,6 +72,17 @@ div#googleMap{
 	position:relative;
 
 }
+
+.checkInfo {
+	color: yellow;
+	font-size: 20px;
+}
+
+#myCheck{
+	width: 25px;
+    height: 25px;
+}
+
 #directions-panel{
 	color: purple; 
 	font-family: 'Raleway',sans-serif; 
