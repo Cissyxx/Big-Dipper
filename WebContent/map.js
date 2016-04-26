@@ -1,4 +1,5 @@
 var pos;
+var current;
 var map;
 var geocoder ;
 var infowindow;
@@ -44,12 +45,11 @@ function initialize() {
 }
 
 
-//function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-//    infoWindow.setPosition(pos);
-//    infoWindow.setContent(browserHasGeolocation ?
-//        'Error: The Geolocation service failed.' :
-//        'Error: Your browser doesn\'t support geolocation.');
-//}
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+    infoWindow.setContent(browserHasGeolocation ?
+        'Error: The Geolocation service failed.' :
+        'Error: Your browser doesn\'t support geolocation.');
+}
 
 
 function currentLoc(){
@@ -91,6 +91,14 @@ function codeLatLng(){
     });
 }
 
+function check(){
+	var current = document.getElementById("myCheck");
+	current.checked = true;
+	if (!current.checked){
+		pos = null;
+	}
+	console.log(pos);
+}
 
 function calculateAndDisplayRoute(checkboxArray){
     var waypts = [];
