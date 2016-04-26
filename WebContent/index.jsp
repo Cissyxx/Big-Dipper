@@ -52,6 +52,7 @@
                 <button type="button" class="btn btn-default" id = 'submit' value="Send">Submit</button>
                 <button type="button" class="btn btn-default" id = 'myajax' value="Blob">Test Ajax</button>
                 <input type="submit" value="Login">
+                <a class="btn btn-default" id="mailTo">Email This Itinerary</a>
             </form>
            <div id = "directions-panel">
                 <h3 id = "directions"> Itinerary </h3>
