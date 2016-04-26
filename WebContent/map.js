@@ -36,9 +36,7 @@ function initialize() {
     directionsService = new google.maps.DirectionsService;
     directionsDisplay = new google.maps.DirectionsRenderer;
     directionsDisplay.setMap(map);
-    document.getElementById('submit').addEventListener('click', function(){
-        //calculateAndDisplayRoute(directionsService, directionsDisplay);
-    });
+    
     document.getElementById('mailTo').addEventListener('click', function() {
         mailToWithAddress();
         /*var loc = ["", "", "", "", ""];

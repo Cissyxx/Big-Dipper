@@ -26,12 +26,16 @@
     <div class = "row">
         <div class="col-xs-4">
            <div class = "description">
-                <h3> Enter your current location in the first entry below as the starting point, then enter up to four more locations that you want to visit: </h3>
+                <h3> Enter your current location in the first entry below, then enter up to four more locations that you want to visit: </h3>
             </div>
             <form name="loginForm">
                 <div class="form-group">
-                    <label for="exampleInputName2">Current Location.</label>
-                    <input type="text" class="form-control" id="loc1" placeholder="15th Street Troy NY 12180" name="loc">
+                    <label for="exampleInputName2">Current Location. (Optional)</label>
+                    <input type="text" class="form-control" id="current_loc" placeholder="15th Street Troy NY 12180" name="loc">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName2">Location 1.</label>
+                    <input type="text" class="form-control" id="loc1" placeholder="Central Park New York" name="loc">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputName2">Location 2. </label>
@@ -49,14 +53,12 @@
                     <label for="exampleInputName2">Location 5.</label>
                     <input type="text" class="form-control" id="loc5" placeholder="Yankee Stadium" name="loc">
                 </div>
-                <button type="button" class="btn btn-default" id = 'submit' value="Send">Submit</button>
                 <button type="button" class="btn btn-default" id = 'myajax' value="Blob">Test Ajax</button>
-                <input type="submit" value="Login">
-                <a class="btn btn-default" id="mailTo">Email This Itinerary</a>
+                
             </form>
            <div id = "directions-panel">
                 <h3 id = "directions"> Itinerary </h3>
-                <p><a id = "mail-link" class = "btn btn-primary"> Mail Itinerary </a>
+                <a class="btn btn-default" id="mailTo">Email This Itinerary</a>
            </div>
         </div>
 
