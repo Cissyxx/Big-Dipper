@@ -1,5 +1,5 @@
 var pos;
-var current;
+var current = false;
 var map;
 var geocoder ;
 var infowindow;
@@ -91,14 +91,6 @@ function codeLatLng(){
     });
 }
 
-function check(){
-	var current = document.getElementById("myCheck");
-	current.checked = true;
-	if (!current.checked){
-		pos = null;
-	}
-	console.log(pos);
-}
 
 function calculateAndDisplayRoute(checkboxArray){
     var waypts = [];
@@ -130,6 +122,17 @@ function calculateAndDisplayRoute(checkboxArray){
 }
 
 $(document).on("click", "#myajax", function(event) {
+	var x, y, checkbox;
+	if ((document.getElementById("myCheck")).checked) {
+		x = pos.lat.toString();
+		y = pos.lng.toString();
+		console.log('checked');
+	}
+	else {
+		x = '';
+		y = '';
+		console.log('checked false');
+	}
 
     var param = {
         loc1: document.getElementsByName("loc")[0].value,
@@ -137,9 +140,9 @@ $(document).on("click", "#myajax", function(event) {
         loc3: document.getElementsByName("loc")[2].value,
         loc4: document.getElementsByName("loc")[3].value,
         loc5: document.getElementsByName("loc")[4].value,
-        lat: pos.lat.toString(),
-        lng: pos.lng.toString()
-    };
+        lat: x,
+        lng: y
+	};
 
     console.log(param);
 

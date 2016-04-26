@@ -33,8 +33,7 @@
                     <label for="exampleInputName2">Current Location. (Optional)</label>
                     <p><button type = "button" class = "btn btn-info" onclick = "currentLoc()">Current Location</button></p>
                 </div>
-                Check this box if you want the current location to be your starting point: <input type = "checkbox" id = "myCheck">
-                <button onclick = "check()"> Ok </button>
+                <label> Check this box if you want the current location to be your starting point: <input type = "checkbox" id = "myCheck"></label>
                 <div class="form-group">
                     <label for="exampleInputName2">Location 1.</label>
                     <input type="text" class="form-control" id="loc1" placeholder="Central Park New York" name="loc">
