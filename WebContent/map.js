@@ -100,6 +100,7 @@ function calculateAndDisplayRoute(checkboxArray){
         });
     }
 
+    console.log(checkboxArray);
     window.alert(checkboxArray);
 
     directionsService.route({
@@ -151,13 +152,14 @@ $(document).on("click", "#myajax", function(event) {
         dataType: 'JSON',
         data: param,
         success: function(responseText) {
-            console.log("response is " + responseText);
+            console.log("response: " + responseText);
 
-            $("#directions").text(responseText);
-            var arr = $.map(responseText, function(el) { return el; })
-            calculateAndDisplayRoute(responseText);
+            $("#directions").text(responseText[1]);
+            var arr = $.map(responseText[0], function(el) { return el; })
+            calculateAndDisplayRoute(responseText[0]);
         },
         error: function(jqXHR, textStatus, errorThrown) {
+        	console.log("response(Error): " + jqXHR.responseText);
             window.alert(jqXHR.responseText);
         }
     });

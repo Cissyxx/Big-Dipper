@@ -82,8 +82,10 @@ public class LocationServlet extends HttpServlet {
             try {
             	resultPath = mManager.getOptimalPath(dest,  isStartOriginSet);
             	resultDirections = mManager.getDirections(resultPath);
-            	out.write(new Gson().toJson(resultPath));
-            	out.write(new Gson().toJson(resultDirections));
+            	List<Object> temp = new LinkedList<>();
+            	temp.add(resultPath);
+            	temp.add(resultDirections);
+            	out.write(new Gson().toJson(temp));
             } catch (final LocationException e){
             	out.write(e.getMessage());
             }
