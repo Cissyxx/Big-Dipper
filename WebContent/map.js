@@ -52,12 +52,6 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 }
 
 
-function currentLoc(){
-    infoWindow = new google.maps.InfoWindow({map: map});
-    infoWindow.setPosition(pos);
-    infoWindow.setContent('Current Location found.');
-
-}
 
 function codeLatLng(){
     var latlng = new google.maps.LatLng(pos.lat, pos.lng);
