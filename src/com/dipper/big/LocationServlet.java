@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.google.maps.model.LatLng;
 
 /**
  * Servlet implementation class LocationServlet
@@ -41,7 +42,15 @@ public class LocationServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String currentLoc, loc1, loc2, loc3, loc4, loc5;
         boolean isStartOriginSet = false;
-        currentLoc = request.getParameter("currentloc");
+        double lat, lng;
+        try{
+        	lat = Double.parseDouble(request.getParameter("lat"));
+            lng = Double.parseDouble(request.getParameter("lng"));
+            currentLoc = mManager.getLocation(new LatLng(lat, lng));
+        } catch (Exception e){
+        	currentLoc = null;
+        }
+        
         System.out.println(currentLoc);
         loc1 = request.getParameter("loc1");
         loc2 = request.getParameter("loc2");

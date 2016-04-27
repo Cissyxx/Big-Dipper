@@ -13,6 +13,7 @@ import com.google.maps.DirectionsApi;
 import com.google.maps.DirectionsApiRequest;
 import com.google.maps.DistanceMatrixApi;
 import com.google.maps.GeoApiContext;
+import com.google.maps.GeocodingApi;
 import com.google.maps.model.DirectionsLeg;
 import com.google.maps.model.DirectionsResult;
 import com.google.maps.model.DirectionsRoute;
@@ -20,6 +21,7 @@ import com.google.maps.model.DirectionsStep;
 import com.google.maps.model.DistanceMatrix;
 import com.google.maps.model.DistanceMatrixElement;
 import com.google.maps.model.DistanceMatrixRow;
+import com.google.maps.model.LatLng;
 
 /**
  * This is a singleton class used in the entire system
@@ -349,5 +351,14 @@ public class MapManager {
          } catch (final Exception e) {
              throw new LocationException(FAIL_TO_GET_DISTANCE, e);
          }
+    }
+    
+    public String getLocation(LatLng coords){
+    	try {
+			return GeocodingApi.reverseGeocode(mContext,coords).await()[0].formattedAddress;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			return null;
+		}
     }
 }
