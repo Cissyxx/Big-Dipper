@@ -39,6 +39,7 @@ public class LocationServlet extends HttpServlet {
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String currentLoc, loc1, loc2, loc3, loc4, loc5;
         boolean isStartOriginSet = false;
@@ -61,8 +62,8 @@ public class LocationServlet extends HttpServlet {
         final MapManager mManager = MapManager.getInstance(API_KEY);
         final List<String> dest = new LinkedList<String>();
         if(currentLoc != null && !currentLoc.isEmpty()){
-        	dest.add(currentLoc);
-        	isStartOriginSet = true;
+            dest.add(currentLoc);
+            isStartOriginSet = true;
         }
         if(loc1 != null && !loc1.isEmpty()) {
             dest.add(loc1);
@@ -83,28 +84,28 @@ public class LocationServlet extends HttpServlet {
 
         // write the result to response
         PrintWriter out;
-        String output;
+        final String output;
         List<String> resultPath = null;
         List<String> resultDirections = null;
         try{
-        	out = response.getWriter();
+            out = response.getWriter();
             try {
-            	resultPath = mManager.getOptimalPath(dest,  isStartOriginSet);
-            	resultDirections = mManager.getDirections(resultPath);
-            	List<Object> temp = new LinkedList<>();
-            	temp.add(resultPath);
-            	temp.add(resultDirections);
-            	out.write(new Gson().toJson(temp));
+                resultPath = mManager.getOptimalPath(dest,  isStartOriginSet);
+                resultDirections = mManager.getDirections(resultPath);
+                final List<Object> temp = new LinkedList<>();
+                temp.add(resultPath);
+                temp.add(resultDirections);
+                out.write(new Gson().toJson(temp));
             } catch (final LocationException e){
-            	out.write(e.getMessage());
+                out.write(e.getMessage());
             }
         } catch (final IOException e){
-        	e.printStackTrace();
+            e.printStackTrace();
         }
     }
 
     /**
-     * @throws ServletException 
+     * @throws ServletException
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
     @Override
