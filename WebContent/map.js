@@ -91,7 +91,6 @@ function codeLatLng(){
     });
 }
 
-
 function calculateAndDisplayRoute(checkboxArray){
     var waypts = [];
     for (var i = 1; i < checkboxArray.length - 1; i++){
@@ -158,8 +157,8 @@ $(document).on("click", "#myajax", function(event) {
             var arr = $.map(responseText, function(el) { return el; })
             calculateAndDisplayRoute(responseText);
         },
-        error: function(data) {
-            window.alert('fail');
+        error: function(jqXHR, textStatus, errorThrown) {
+            window.alert(jqXHR.responseText);
         }
     });
 

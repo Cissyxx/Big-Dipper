@@ -5,7 +5,6 @@ import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,7 +28,8 @@ public class LocationServlet extends HttpServlet {
         super();
     }
 
-    public void init() throws ServletException
+    @Override
+    public void init()
     {
         // initialize mManager
         mManager = MapManager.getInstance(API_KEY);
@@ -37,7 +37,8 @@ public class LocationServlet extends HttpServlet {
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) {
         String loc1, loc2, loc3, loc4, loc5;
         loc1 = request.getParameter("loc1");
         loc2 = request.getParameter("loc2");
@@ -45,8 +46,8 @@ public class LocationServlet extends HttpServlet {
         loc4 = request.getParameter("loc4");
         loc5 = request.getParameter("loc5");
 
-        MapManager mManager = MapManager.getInstance(API_KEY);
-        List<String> dest = new LinkedList<String>();
+        final MapManager mManager = MapManager.getInstance(API_KEY);
+        final List<String> dest = new LinkedList<String>();
         if(loc1 != null && !loc1.isEmpty()) {
             dest.add(loc1);
         }
@@ -65,20 +66,33 @@ public class LocationServlet extends HttpServlet {
 
 
         // write the result to response
-        PrintWriter out = response.getWriter();
-        String output = new Gson().toJson(mManager.getOptimalPath(dest));
-        out.write(output);
+        PrintWriter out;
+        String output;
+        try {
+            out = response.getWriter();
+            try {
+                output = new Gson().toJson(mManager.getOptimalPath(dest));
+                out.write(output);
+            } catch (final LocationException e) {
+                // TODO Auto-generated catch block
+                out.write(e.getMessage());
+            }
+        } catch (final IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        boolean ajax = "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        final boolean ajax = "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
 
         if (ajax) {
             // Handle ajax (JSON or XML) response.
-            PrintWriter out = response.getWriter();
+            final PrintWriter out = response.getWriter();
             System.out.println("Handled with AJAX");
         } else {
             // Handle regular (JSP) response.
