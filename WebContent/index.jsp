@@ -31,7 +31,7 @@
             <form name="loginForm">
                 <div class="form-group">
                     <label for="exampleInputName2">Current Location. (Optional)</label>
-                    <button type = "button" class = "btn btn-info" onclick = "currentLoc()">Current Location</button>
+                    <button type = "button" class = "btn btn-info" onclick = "codeLatLng()">Current Location</button>
                 </div>
                 <label class="checkInfo"> 
                     Check this box to set your current location as starting point: 
