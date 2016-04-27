@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -39,6 +40,7 @@ public class LocationServlet extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String currentLoc, loc1, loc2, loc3, loc4, loc5;
+        boolean isStartOriginSet = false;
         currentLoc = request.getParameter("currentloc");
         System.out.println(currentLoc);
         loc1 = request.getParameter("loc1");
@@ -49,6 +51,10 @@ public class LocationServlet extends HttpServlet {
 
         final MapManager mManager = MapManager.getInstance(API_KEY);
         final List<String> dest = new LinkedList<String>();
+        if(currentLoc != null && !currentLoc.isEmpty()){
+        	dest.add(currentLoc);
+        	isStartOriginSet = true;
+        }
         if(loc1 != null && !loc1.isEmpty()) {
             dest.add(loc1);
         }
@@ -69,26 +75,29 @@ public class LocationServlet extends HttpServlet {
         // write the result to response
         PrintWriter out;
         String output;
-        try {
-            out = response.getWriter();
+        List<String> resultPath = null;
+        List<String> resultDirections = null;
+        try{
+        	out = response.getWriter();
             try {
-                output = new Gson().toJson(mManager.getOptimalPath(dest));
-                out.write(output);
-            } catch (final LocationException e) {
-                // TODO Auto-generated catch block
-                out.write(e.getMessage());
+            	resultPath = mManager.getOptimalPath(dest,  isStartOriginSet);
+            	resultDirections = mManager.getDirections(resultPath);
+            	out.write(new Gson().toJson(resultPath));
+            	out.write(new Gson().toJson(resultDirections));
+            } catch (final LocationException e){
+            	out.write(e.getMessage());
             }
-        } catch (final IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+        } catch (final IOException e){
+        	e.printStackTrace();
         }
     }
 
     /**
+     * @throws ServletException 
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         final boolean ajax = "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
 
         if (ajax) {

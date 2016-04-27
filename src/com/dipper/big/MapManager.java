@@ -13,7 +13,10 @@ import com.google.maps.DirectionsApi;
 import com.google.maps.DirectionsApiRequest;
 import com.google.maps.DistanceMatrixApi;
 import com.google.maps.GeoApiContext;
+import com.google.maps.model.DirectionsLeg;
 import com.google.maps.model.DirectionsResult;
+import com.google.maps.model.DirectionsRoute;
+import com.google.maps.model.DirectionsStep;
 import com.google.maps.model.DistanceMatrix;
 import com.google.maps.model.DistanceMatrixElement;
 import com.google.maps.model.DistanceMatrixRow;
@@ -203,7 +206,7 @@ public class MapManager {
      * @return an ordered list of destinations corresponding to the optimal path,
      * @throws LocationException
      */
-    private static List<String> getOptimalPath(DistanceMatrix mtx) throws LocationException{
+    private static List<String> getOptimalPath(DistanceMatrix mtx, boolean isStartLocSet) throws LocationException{
         final List<String> mResult = new LinkedList<>();
         final int mSize = mtx.destinationAddresses.length;
 
@@ -213,8 +216,15 @@ public class MapManager {
         long bestDistance = Long.MAX_VALUE;
         List<Integer> bestPath = null;
 
+        //Track whether start location is set
+        int originLength = 0;
+        if(isStartLocSet)
+        	originLength = 1;
+        else 
+        	originLength = mtx.originAddresses.length;
+        	
         //For each origin - Note, this must be 1-based
-        for(int i = 1; i <= mtx.originAddresses.length; i++){
+        for(int i = 1; i <= originLength; i++){
             mDistance = new HashMap<>();
             mPath = new HashMap<>();
 
@@ -290,10 +300,11 @@ public class MapManager {
     /**
      * Get the best path
      * @param mDestinations list of destinations
+     * @param isStartLocSet if true, takes first destination as start location
      * @return list of ordered destinations
      * @throws LocationException
      */
-    public List<String> getOptimalPath(List<String> mDestinations) throws LocationException{
+    public List<String> getOptimalPath(List<String> mDestinations, boolean isStartLocSet) throws LocationException{
 
         try {
             //Grab Distance Matrix
@@ -302,18 +313,7 @@ public class MapManager {
             //Check if successful
             if(mtx != null){
                 //Search for optimal path
-                final List<String> mPath = getOptimalPath(mtx);
-
-
-                final DirectionsApiRequest mRequest = DirectionsApi.getDirections(mContext, mPath.get(0), mPath.get(mPath.size()-1));
-                try {
-                    final DirectionsResult mResult = mRequest.waypoints(mPath.subList(1, mPath.size()).toArray(new String[mPath.size()-2])).await();
-
-                    /* Do something with results */
-
-                } catch (final Exception e) {
-                    throw new LocationException(FAIL_TO_GET_DISTANCE, e);
-                }
+                final List<String> mPath = getOptimalPath(mtx, isStartLocSet);
 
                 return mPath;
             } else {
@@ -324,5 +324,30 @@ public class MapManager {
         {
             throw new LocationException(FAIL_DISTANCE_MATRIX, e);
         }
+    }
+    
+    /**
+     * Return the ordered list of directions given a path
+     * @param mPath ordered list of destinations
+     * @return ordered list of directions
+     * @throws LocationException
+     */
+    public List<String> getDirections(List<String> mPath) throws LocationException{
+    	 DirectionsApiRequest mRequest = DirectionsApi.getDirections(mContext, mPath.get(0), mPath.get(mPath.size()-1));
+         try {
+             DirectionsResult mResult = mRequest.waypoints(mPath.subList(1, mPath.size()).toArray(new String[mPath.size()-2])).await();
+             List<String> resultDirections = new LinkedList<String>();
+             
+             for(DirectionsRoute r : mResult.routes){
+             	for(DirectionsLeg l: r.legs){
+             		for(DirectionsStep s: l.steps){
+             			resultDirections.add(s.htmlInstructions);
+             		}
+             	}
+             }
+             return resultDirections;
+         } catch (final Exception e) {
+             throw new LocationException(FAIL_TO_GET_DISTANCE, e);
+         }
     }
 }

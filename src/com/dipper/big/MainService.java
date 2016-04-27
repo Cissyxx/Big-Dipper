@@ -50,6 +50,6 @@ public class MainService {
         destinations.add("times square");
 
         //Grab optimal path
-        System.out.println(mManager.getOptimalPath(destinations).toString());
+        System.out.println(mManager.getOptimalPath(destinations, false).toString());
     }
 }
