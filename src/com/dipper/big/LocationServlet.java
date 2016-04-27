@@ -39,7 +39,8 @@ public class LocationServlet extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String currentLoc, loc1, loc2, loc3, loc4, loc5;
-        currentLoc = request.getParameter("current_loc");
+        currentLoc = request.getParameter("currentloc");
+        System.out.println(currentLoc);
         loc1 = request.getParameter("loc1");
         loc2 = request.getParameter("loc2");
         loc3 = request.getParameter("loc3");
