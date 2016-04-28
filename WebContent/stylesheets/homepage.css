@@ -52,7 +52,7 @@ p{
 .description{
 	color: #ffffff; 
 	font-family: 'Raleway',sans-serif; 
-	font-size: 20px; 
+	font-size: 18px; 
 	font-weight: 800; 
 	line-height: 36px; 
 	margin: 0 0 5px; 
@@ -81,6 +81,7 @@ div#googleMap{
 .checkInfo {
 	color: yellow;
 	font-size: 20px;
+	vertical-align: middle;
 }
 
 #myCheck{
@@ -94,7 +95,7 @@ div#googleMap{
 	font-size: 30px; 
 	font-weight: 800; 
 	line-height: 36px; 
-	margin: 10px 0 24px; 
+	margin: 10px 15px;
 	text-align: center;
 	background-color: #FFEE77;
 	height: 350px;
@@ -133,3 +134,13 @@ img{
 	margin: 10px 0 0 10px;		
 }
 
+#forms{
+	margin: 0 15px;
+}
+.btn{
+	margin: 0 0 0 80px;
+}
+
+#myajax{
+	margin: 10px 0 10px 0;
+}

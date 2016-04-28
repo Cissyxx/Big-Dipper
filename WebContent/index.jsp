@@ -27,17 +27,18 @@
     <div class = "row">
         <div class="col-xs-4">
            <div class = "description">
-                <h3> Enter your current location in the first entry below, then enter up to four more locations that you want to visit: </h3>
+                <h3> Enter up to five more locations that you want to visit: </h3>
             </div>
-            <form name="loginForm">
+            <form name="loginForm" id = "forms">
                 <div class="form-group">
-                    <label for="exampleInputName2">Current Location </label>
-                    <button type = "button" class = "btn btn-info" onclick = "codeLatLng()">Current Location</button>
+                
+	                <label class="checkInfo"> 
+	                    Check this box to set your current location as starting point: 
+	                    <input class="btn btn-default" type = "checkbox" id = "myCheck">
+	                    <button type = "button" class = "btn btn-info" onclick = "codeLatLng()">Current Location</button>
+	                </label>
+	                
                 </div>
-                <label class="checkInfo"> 
-                    Check this box to set your current location as starting point: 
-                    <input class="btn btn-default" type = "checkbox" id = "myCheck">
-                </label>
                 <div class="form-group">
                     <label for="exampleInputName2">Location 1.</label>
                     <input type="text" class="form-control" id="loc1" placeholder="Central Park New York" name="loc">
