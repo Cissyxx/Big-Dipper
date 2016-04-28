@@ -46,16 +46,16 @@ p{
 	font-size: 18px; 
 	font-weight: 500; 
 	line-height: 32px; 
-	margin: 0 0 24px;
+	margin: 0 0 0 0;
 }
 
 .description{
 	color: #ffffff; 
 	font-family: 'Raleway',sans-serif; 
-	font-size: 30px; 
+	font-size: 20px; 
 	font-weight: 800; 
 	line-height: 36px; 
-	margin: 0 0 24px; 
+	margin: 0 0 5px; 
 	text-align: center;
 }
 .row{
@@ -129,3 +129,7 @@ img{
     line-height: 16px;
     font-weight: 600;
 }
+.btn-default{
+	margin: 10px 0 0 10px;		
+}
+
