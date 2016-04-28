@@ -5,7 +5,8 @@ var pos,
     infowindow,
     marker,
     directionsService,
-    directionsDisplay;
+    directionsDisplay,
+    defaultDirection = '<h3 id = "directions"> Itinerary </h3><a class="btn btn-default" id="mailTo">Email This Itinerary</a>';
 
 /**
  * initialize the web page and handle event registration
@@ -41,11 +42,6 @@ function initialize() {
     directionsService = new google.maps.DirectionsService;
     directionsDisplay = new google.maps.DirectionsRenderer;
     directionsDisplay.setMap(map);
-
-    // register mailto button event
-    document.getElementById('mailTo').addEventListener('click', function() {
-        mailToWithAddress();
-    });
 
 }
 
@@ -131,7 +127,13 @@ function calculateAndDisplayRoute(checkboxArray){
 }
 
 /**
- * whenever the submit bottom is clicked, send corresponding request to back end
+ * whenever the mail to button is clicked, open default email app with
+ * auto-filled subject and body
+ */
+$(document).on("click", "#mailTo", mailToHandler);
+
+/**
+ * whenever the submit button is clicked, send corresponding request to back end
  */
 $(document).on("click", "#myajax", function(event) {
 	var x, y, checkbox;
@@ -168,7 +170,7 @@ $(document).on("click", "#myajax", function(event) {
 
             // add direction detail to bottom left corner
             var div = document.getElementById('directions-panel');
-            div.innerHTML = div.innerHTML + organizeDirection(responseText[1]);
+            div.innerHTML = defaultDirection + organizeDirection(responseText[1]);
 
             var arr = $.map(responseText[0], function(el) { return el; })
             calculateAndDisplayRoute(responseText[0]);
@@ -200,7 +202,7 @@ function organizeDirection(responseText)
 }
 
 // handles mail to event
-function mailToWithAddress(event) {
+function mailToHandler(event) {
     var loc = ["", "", "", "", ""];
     loc[0] = "loc1=%22"+document.getElementById("loc1").value.replace(" ", "%20")+"%22";
     loc[1] = "loc2=%22"+document.getElementById("loc2").value.replace(" ", "%20")+"%22";
