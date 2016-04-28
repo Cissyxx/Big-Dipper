@@ -168,9 +168,9 @@ public class MapManager {
 
             //Make a new subset without node
             final Set<Integer> tempSubset = new HashSet<Integer>(mSubset);
-            System.out.println("Before: " + tempSubset);
+            //System.out.println("Before: " + tempSubset);
             tempSubset.remove(node);
-            System.out.println("Remaining: " + tempSubset);
+            //System.out.println("Remaining: " + tempSubset);
 
             //Find minimal distance
             final Iterator<Integer> i = tempSubset.iterator();
@@ -220,11 +220,12 @@ public class MapManager {
 
         //Track whether start location is set
         int originLength = 0;
-        if(isStartLocSet)
-        	originLength = 1;
-        else 
-        	originLength = mtx.originAddresses.length;
-        	
+        if(isStartLocSet) {
+            originLength = 1;
+        } else {
+            originLength = mtx.originAddresses.length;
+        }
+
         //For each origin - Note, this must be 1-based
         for(int i = 1; i <= originLength; i++){
             mDistance = new HashMap<>();
@@ -327,7 +328,7 @@ public class MapManager {
             throw new LocationException(FAIL_DISTANCE_MATRIX, e);
         }
     }
-    
+
     /**
      * Return the ordered list of directions given a path
      * @param mPath ordered list of destinations
@@ -335,22 +336,22 @@ public class MapManager {
      * @throws LocationException
      */
     public List<String> getDirections(List<String> mPath) throws LocationException{
-    	 DirectionsApiRequest mRequest = DirectionsApi.getDirections(mContext, mPath.get(0), mPath.get(mPath.size()-1));
-         try {
-             DirectionsResult mResult = mRequest.waypoints(mPath.subList(1, mPath.size()).toArray(new String[mPath.size()-2])).await();
-             List<String> resultDirections = new LinkedList<String>();
-             
-             for(DirectionsRoute r : mResult.routes){
-             	for(DirectionsLeg l: r.legs){
-             		for(DirectionsStep s: l.steps){
-             			resultDirections.add(s.htmlInstructions);
-             		}
-             	}
-             }
-             return resultDirections;
-         } catch (final Exception e) {
-             throw new LocationException(FAIL_TO_GET_DISTANCE, e);
-         }
+        final DirectionsApiRequest mRequest = DirectionsApi.getDirections(mContext, mPath.get(0), mPath.get(mPath.size()-1));
+        try {
+            final DirectionsResult mResult = mRequest.waypoints(mPath.subList(1, mPath.size()).toArray(new String[mPath.size()-2])).await();
+            final List<String> resultDirections = new LinkedList<String>();
+
+            for(final DirectionsRoute r : mResult.routes){
+                for(final DirectionsLeg l: r.legs){
+                    for(final DirectionsStep s: l.steps){
+                        resultDirections.add(s.htmlInstructions);
+                    }
+                }
+            }
+            return resultDirections;
+        } catch (final Exception e) {
+            throw new LocationException(FAIL_TO_GET_DISTANCE, e);
+        }
     }
     
     public String getLocation(LatLng coords){

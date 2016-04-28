@@ -148,7 +148,10 @@ $(document).on("click", "#myajax", function(event) {
         success: function(responseText) {
             console.log("response: " + responseText);
 
-            $("#directions").text(responseText[1]);
+            // add direction detail to bottom left corner
+            var div = document.getElementById('directions-panel');
+            div.innerHTML = div.innerHTML + organizeDirection(responseText[1]);
+
             var arr = $.map(responseText[0], function(el) { return el; })
             calculateAndDisplayRoute(responseText[0]);
         },
@@ -161,18 +164,28 @@ $(document).on("click", "#myajax", function(event) {
     event.preventDefault();
 });
 
+function organizeDirection(responseText)
+{
+    var allDirection = '';
+    var i = 0;
+    for (; i < responseText.length; i++)
+    {
+        var eachStep = '<p class="direction-detail">' + responseText[i].replace('<div', '<div class="direction-warning"') + '</p>';
+        allDirection = allDirection + eachStep;
+    }
+    return allDirection;
+}
+
 function mailToWithAddress(event) {
     var loc = ["", "", "", "", ""];
-    //console.log(loc);
     loc[0] = "loc1=%22"+document.getElementById("loc1").value.replace(" ", "%20")+"%22";
     loc[1] = "loc2=%22"+document.getElementById("loc2").value.replace(" ", "%20")+"%22";
     loc[2] = "loc3=%22"+document.getElementById("loc3").value.replace(" ", "%20")+"%22";
     loc[3] = "loc4=%22"+document.getElementById("loc4").value.replace(" ", "%20")+"%22";
     loc[4] = "loc5=%22"+document.getElementById("loc5").value.replace(" ", "%20")+"%22";
-    //console.log("location is " + loc);
 
     // create mailto link
-    prefex = "mailto:&subject=My%20Itinerary&body=The%20link%20is:";
+    prefex = "mailto:&subject=My%20Itinerary&body=The%20link%20is:%20";
     endvar = loc.join("%26");
     httpAddress = document.location.origin+document.location.pathname+"%3F"+endvar;
     document.location.href = prefex + httpAddress;
