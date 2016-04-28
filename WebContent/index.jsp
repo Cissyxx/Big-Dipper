@@ -20,6 +20,7 @@
 </head>
 <body>
     <div class = "page-header">
+    	<img src="images/logo.jpg" class = "pull_left">
         <h1>Big Dipper</h1>
     </div>
 
