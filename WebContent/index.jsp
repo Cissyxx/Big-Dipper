@@ -26,9 +26,7 @@
 
     <div class = "row">
         <div class="col-xs-4">
-           <div class = "description">
-                <h3> Enter up to five more locations that you want to visit: </h3>
-            </div>
+           
             <form name="loginForm" id = "forms">
                 <div class="form-group">
                 
@@ -39,6 +37,9 @@
 	                </label>
 	                
                 </div>
+                <div class = "description">
+                	<h3> Enter up to five locations that you want to visit: </h3>
+            	</div>
                 <div class="form-group">
                     <label for="exampleInputName2">Location 1.</label>
                     <input type="text" class="form-control" id="loc1" placeholder="Central Park New York" name="loc">

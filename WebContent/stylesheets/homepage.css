@@ -82,6 +82,7 @@ div#googleMap{
 	color: yellow;
 	font-size: 20px;
 	vertical-align: middle;
+	margin-top: 12px;
 }
 
 #myCheck{
@@ -142,5 +143,11 @@ img{
 }
 
 #myajax{
-	margin: 10px 0 10px 0;
+	margin: 14px 0 10px 0;
+}
+
+h3{
+	margin: 5px 0 0 0 ;
+	font-size: 20px;
+	text-align: left;
 }
