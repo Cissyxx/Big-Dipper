@@ -157,7 +157,7 @@ public class MapManager {
      * @param mSubset locations in travel order
      * @param node starting location
      * @return
-     * @throws LocationException
+     * @throws LocationException when something unexpected happens
      */
     private static long getMinimalDistance(DistanceMatrix mtx, Map< Set<Integer>, Map<Integer, Long> > mDistance,
             Map< Set<Integer>, Map<Integer, List<Integer>> > mPath, Set<Integer> mSubset, Integer node) throws LocationException{
@@ -206,7 +206,7 @@ public class MapManager {
      * Get the optimal path, which consists of each destination exactly once
      * @param mtx distance matrix provided by Google API
      * @return an ordered list of destinations corresponding to the optimal path,
-     * @throws LocationException
+     * @throws LocationException when something unexpected happens
      */
     private static List<String> getOptimalPath(DistanceMatrix mtx, boolean isStartLocSet) throws LocationException{
         final List<String> mResult = new LinkedList<>();
@@ -305,7 +305,7 @@ public class MapManager {
      * @param mDestinations list of destinations
      * @param isStartLocSet if true, takes first destination as start location
      * @return list of ordered destinations
-     * @throws LocationException
+     * @throws LocationException when something unexpected happens
      */
     public List<String> getOptimalPath(List<String> mDestinations, boolean isStartLocSet) throws LocationException{
 
@@ -333,7 +333,7 @@ public class MapManager {
      * Return the ordered list of directions given a path
      * @param mPath ordered list of destinations
      * @return ordered list of directions
-     * @throws LocationException
+     * @throws LocationException when something unexpected happens
      */
     public List<String> getDirections(List<String> mPath) throws LocationException{
         final DirectionsApiRequest mRequest = DirectionsApi.getDirections(mContext, mPath.get(0), mPath.get(mPath.size()-1));
@@ -353,13 +353,13 @@ public class MapManager {
             throw new LocationException(FAIL_TO_GET_DISTANCE, e);
         }
     }
-    
+
     public String getLocation(LatLng coords){
-    	try {
-			return GeocodingApi.reverseGeocode(mContext,coords).await()[0].formattedAddress;
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			return null;
-		}
+        try {
+            return GeocodingApi.reverseGeocode(mContext,coords).await()[0].formattedAddress;
+        } catch (final Exception e) {
+            // TODO Auto-generated catch block
+            return null;
+        }
     }
 }

@@ -1,11 +1,15 @@
-var pos;
-var current = false;
-var map;
-var geocoder ;
-var infowindow;
-var marker;
-var directionsService;
-var directionsDisplay;
+var pos,
+    current = false,
+    map,
+    geocoder,
+    infowindow,
+    marker,
+    directionsService,
+    directionsDisplay;
+
+/**
+ * initialize the web page and handle event registration
+ */
 function initialize() {
     var mapOptions = {
         center: new google.maps.LatLng(42.730787,-73.682488),
@@ -13,6 +17,7 @@ function initialize() {
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
+    // setup google map api
     map = new google.maps.Map(document.getElementById("googleMap"), mapOptions);
     geocoder =  new google.maps.Geocoder();
     if (navigator.geolocation) {
@@ -44,15 +49,21 @@ function initialize() {
 
 }
 
-
+/**
+ * handles location error
+ * @param browserHasGeolocation
+ * @param infoWindow
+ * @param pos
+ */
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
     infoWindow.setContent(browserHasGeolocation ?
         'Error: The Geolocation service failed.' :
         'Error: Your browser doesn\'t support geolocation.');
 }
 
-
-
+/**
+ * get latitude and longitude
+ */
 function codeLatLng(){
     var latlng = new google.maps.LatLng(pos.lat, pos.lng);
     geocoder.geocode({'latLng': latlng}, function(results, status)
@@ -85,6 +96,10 @@ function codeLatLng(){
     });
 }
 
+/**
+ * display the route on map section
+ * @param checkboxArray
+ */
 function calculateAndDisplayRoute(checkboxArray){
     var waypts = [];
     for (var i = 1; i < checkboxArray.length - 1; i++){
@@ -115,6 +130,9 @@ function calculateAndDisplayRoute(checkboxArray){
     });
 }
 
+/**
+ * whenever the submit bottom is clicked, send corresponding request to back end
+ */
 $(document).on("click", "#myajax", function(event) {
 	var x, y, checkbox;
 	if ((document.getElementById("myCheck")).checked) {
@@ -164,6 +182,11 @@ $(document).on("click", "#myajax", function(event) {
     event.preventDefault();
 });
 
+/**
+ * organize direction text from back end to be more readable
+ * @param responseText
+ * @returns {String}
+ */
 function organizeDirection(responseText)
 {
     var allDirection = '';
@@ -176,6 +199,7 @@ function organizeDirection(responseText)
     return allDirection;
 }
 
+// handles mail to event
 function mailToWithAddress(event) {
     var loc = ["", "", "", "", ""];
     loc[0] = "loc1=%22"+document.getElementById("loc1").value.replace(" ", "%20")+"%22";
