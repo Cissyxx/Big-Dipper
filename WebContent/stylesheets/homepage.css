@@ -97,7 +97,8 @@ div#googleMap{
 	margin: 10px 0 24px; 
 	text-align: center;
 	background-color: #FFEE77;
-<<<<<<< HEAD
+	height: 350px;
+	overflow: auto;
 }
 img{
 	border-radius: 8px;
@@ -105,10 +106,6 @@ img{
 	margin: 10px 0px 0px 150px;
 	height: 100px;
 	vertical-align: top;
-}
-=======
-	height: 350px;
-	overflow: auto;
 }
 
 #directions {
@@ -132,4 +129,3 @@ img{
     line-height: 16px;
     font-weight: 600;
 }
->>>>>>> origin/dev
