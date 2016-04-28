@@ -31,7 +31,7 @@
                 <div class="form-group">
                 
 	                <label class="checkInfo"> 
-	                    Check this box to set your current location as starting point: 
+	                    Check the checkbox to set the current location as the starting point: 
 	                    <input class="btn btn-default" type = "checkbox" id = "myCheck">
 	                    <button type = "button" class = "btn btn-info" onclick = "codeLatLng()">Current Location</button>
 	                </label>
