@@ -93,6 +93,23 @@ function codeLatLng(){
 }
 
 /**
+ * organize destination order in a more readable format
+ * @param checkboxArray
+ * @returns {String}
+ */
+function organizeDestination(checkboxArray)
+{
+    var i = 0,
+        destinationOrder = "The destination travel order is as below:";
+    while (i < checkboxArray.length) {
+        destinationOrder += "\nStop " + (i+1) + ": " + checkboxArray[i];
+        i++;
+    }
+    return destinationOrder;
+}
+
+
+/**
  * display the route on map section
  * @param checkboxArray
  */
@@ -106,7 +123,7 @@ function calculateAndDisplayRoute(checkboxArray){
     }
 
     console.log(checkboxArray);
-    window.alert(checkboxArray);
+    window.alert(organizeDestination(checkboxArray));
 
     directionsService.route({
         origin: checkboxArray[0],
