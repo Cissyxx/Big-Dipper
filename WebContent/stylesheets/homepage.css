@@ -94,9 +94,10 @@ div#googleMap{
 	font-size: 30px; 
 	font-weight: 800; 
 	line-height: 36px; 
-	margin: 0 0 24px; 
+	margin: 10px 0 24px; 
 	text-align: center;
 	background-color: #FFEE77;
+<<<<<<< HEAD
 }
 img{
 	border-radius: 8px;
@@ -105,3 +106,30 @@ img{
 	height: 100px;
 	vertical-align: top;
 }
+=======
+	height: 350px;
+	overflow: auto;
+}
+
+#directions {
+    display: inline-block;
+    margin: 5px;
+}
+
+.direction-detail {
+    text-align: left;
+    color: black;
+    font-size: 16px !important;
+    line-height: 16px;
+    font-weight: 600;
+    margin: 12px 0 12px 6px;
+}
+
+.direction-warning {
+    text-align: center;
+    color: green;
+    font-size: 16px !important;
+    line-height: 16px;
+    font-weight: 600;
+}
+>>>>>>> origin/dev
