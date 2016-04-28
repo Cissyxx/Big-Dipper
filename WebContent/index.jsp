@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Big Dipper Homepage</title>
-
+	<link rel="icon" href="images/logo.png">
     <meta charset="UTF-8">
 
     <!-- Needed for mobile friendly site ****************************************************************************-->
@@ -20,7 +20,7 @@
 </head>
 <body>
     <div class = "page-header">
-    	<img src="images/logo.jpg" class = "pull_left">
+    	<img src="images/logo.png" class = "pull_left">
         <h1>Big Dipper</h1>
     </div>
 
