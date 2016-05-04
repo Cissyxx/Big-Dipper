@@ -29,5 +29,6 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/xix/Documents/RPI/Senior/16Spring/SDD/mockito-1.9.5/separate-jars/mockito-core-1.9.5.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

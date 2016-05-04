@@ -2,6 +2,9 @@
     <wb-module deploy-name="Big-Dipper">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <dependent-module archiveName="mockito-master.zip" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/xix/Documents/RPI/Senior/16Spring/SDD/mockito-master.zip">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="Big-Dipper"/>
         <property name="java-output-path" value="/Big-Dipper/target/classes"/>
     </wb-module>
