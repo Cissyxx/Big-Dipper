@@ -45,13 +45,13 @@ public class LocationServlet extends HttpServlet {
         boolean isStartOriginSet = false;
         double lat, lng;
         try{
-        	lat = Double.parseDouble(request.getParameter("lat"));
+            lat = Double.parseDouble(request.getParameter("lat"));
             lng = Double.parseDouble(request.getParameter("lng"));
             currentLoc = mManager.getLocation(new LatLng(lat, lng));
-        } catch (Exception e){
-        	currentLoc = null;
+        } catch (final Exception e){
+            currentLoc = null;
         }
-        
+
         System.out.println(currentLoc);
         loc1 = request.getParameter("loc1");
         loc2 = request.getParameter("loc2");
@@ -60,7 +60,7 @@ public class LocationServlet extends HttpServlet {
         loc5 = request.getParameter("loc5");
 
         final MapManager mManager = MapManager.getInstance(API_KEY);
-        final List<String> dest = new LinkedList<String>();
+        final DistanceResult dest = new DistanceResult();
         if(currentLoc != null && !currentLoc.isEmpty()){
             dest.add(currentLoc);
             isStartOriginSet = true;
@@ -81,17 +81,24 @@ public class LocationServlet extends HttpServlet {
             dest.add(loc5);
         }
 
+        System.out.println("dest has size " + dest.size());
+        final String[] temp1 = dest.toArray(new String[dest.size()]);
+        for (int i = 0; i < dest.size(); i++)
+        {
+            System.out.println(temp1[i]);
+        }
+        System.out.println(dest.toString());
 
         // write the result to response
         PrintWriter out;
         final String output;
-        List<String> resultPath = null;
+        DistanceResult resultPath = null;
         List<String> resultDirections = null;
         try{
             out = response.getWriter();
             try {
-                resultPath = mManager.getOptimalPath(dest,  isStartOriginSet);
-                resultDirections = mManager.getDirections(resultPath);
+                resultPath = mManager.getAllOptimalPath(dest,  isStartOriginSet);
+                resultDirections = mManager.getDirections(resultPath).getResult();
                 final List<Object> temp = new LinkedList<>();
                 temp.add(resultPath);
                 temp.add(resultDirections);

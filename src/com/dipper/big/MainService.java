@@ -1,8 +1,5 @@
 package com.dipper.big;
 
-import java.util.LinkedList;
-import java.util.List;
-
 /* Current APIs' set:
  * -  Google Maps Directions
  * -  Google Maps Geocoding
@@ -44,12 +41,12 @@ public class MainService {
         //Initialization
         mManager = MapManager.getInstance(API_KEY);
 
-        final List<String> destinations = new LinkedList<String>();
+        final DistanceResult destinations = new DistanceResult();
         destinations.add("central park");
         destinations.add("high line");
         destinations.add("times square");
 
         //Grab optimal path
-        System.out.println(mManager.getOptimalPath(destinations, false).toString());
+        System.out.println(mManager.getAllOptimalPath(destinations, false).toString());
     }
 }
