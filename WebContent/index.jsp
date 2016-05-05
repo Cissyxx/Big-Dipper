@@ -38,7 +38,7 @@
 	                
                 </div>
                 <div class = "description">
-                	<h3> Enter up to five locations that you want to visit: </h3>
+                	<h3> Enter up to five locations that you want to drive through: </h3>
             	</div>
                 <div class="form-group">
                     <label for="exampleInputName2">Location 1.</label>
