@@ -106,7 +106,7 @@ public class MapManager {
     private static void combinationHelper(int min, int max, int n, DistanceRecord mRecord, Set<DistanceRecord> mResult){
         final int minRange = min + 1;
         if(n == 0){
-            mResult.add(mRecord);
+            mResult.add(new DistanceRecord(mRecord));
         } else {
             for(Integer i = minRange; i <= max - (n-1); i++){
                 mRecord.add(i);
@@ -115,36 +115,6 @@ public class MapManager {
             }
         }
     }
-
-    //    /**
-    //     * Print matrix
-    //     * @param mtx distance matrix obtained from previous functions
-    //     */
-    //    private static void printMatrix(DistanceMatrix mtx){
-    //        //Check if successful
-    //        if(mtx != null){
-    //            //Grab list of destinations
-    //            final DistanceResult destinations = new DistanceResult(Arrays.asList(mtx.originAddresses));
-    //
-    //            System.out.println("Origins:");
-    //            for(final String s: destinations){
-    //                System.out.println(s);
-    //            }
-    //
-    //            System.out.println("Destinations:");
-    //            for(final String s: mtx.destinationAddresses){
-    //                System.out.println(s);
-    //            }
-    //
-    //            for(final DistanceMatrixRow d: mtx.rows){
-    //                for(final DistanceMatrixElement e : d.elements) {
-    //                    System.out.print("{" + e.distance.inMeters + " meteres | "
-    //                            + e.duration.inSeconds + " seconds}");
-    //                }
-    //                System.out.println("");
-    //            }
-    //        }
-    //    }
 
     /**
      * Get the minimum distance
@@ -164,10 +134,8 @@ public class MapManager {
             int mResultCity = -1;
 
             //Make a new subset without node
-            final DistanceRecord tempSubset = mSubset;
-            //System.out.println("Before: " + tempSubset);
+            final DistanceRecord tempSubset = new DistanceRecord(mSubset);
             tempSubset.remove(node);
-            //System.out.println("Remaining: " + tempSubset);
 
             //Find minimal distance
             final Iterator<Integer> i = tempSubset.iterator();
@@ -175,7 +143,7 @@ public class MapManager {
                 final int mCity = i.next();
 
                 //Hacky way to deal with Overflow
-                final long d = Math.abs(mDistance.get(tempSubset).get(mCity) + mtx.rows[mCity-1].elements[node-1].distance.inMeters);
+                final long d = Math.abs(mDistance.get(tempSubset).getValue(mCity) + mtx.rows[mCity-1].elements[node-1].distance.inMeters);
 
                 //Check which value is smaller
                 if(mResult > d){
@@ -185,11 +153,8 @@ public class MapManager {
             }
 
             //Add to mPath and return result
-            //System.out.println("TempSubset: " + tempSubset.toString() + " " + mResultCity);
             final List<Integer> mNewPath = new LinkedList<Integer>(mPath.get(tempSubset).get(mResultCity));
-            //System.out.println("Path: " + mNewPath.toString());
             mNewPath.add(node);
-            //System.out.println("Subset: " + mSubset.toString() + " " + node);
             mPath.get(mSubset).put(node,mNewPath);
 
             return mResult;
@@ -213,9 +178,8 @@ public class MapManager {
         Map<DistanceRecord, DistanceLength> mDistance;
         Map<DistanceRecord, DistancePath> mPath;
         long bestDistance = Long.MAX_VALUE;
-        List<Integer> bestPath = null;
+        List<Integer> bestPath = new LinkedList<Integer>();
 
-        System.out.println("cp1");
         //Track whether start location is set
         int originLength = 0;
         if(isStartLocSet) {
@@ -223,14 +187,12 @@ public class MapManager {
         } else {
             originLength = mtx.originAddresses.length;
         }
-        System.out.println("cp2");
 
         //For each origin - Note, this must be 1-based
         for(int i = 1; i <= originLength; i++){
             mDistance = new HashMap<DistanceRecord, DistanceLength>();
             mPath = new HashMap<>();
 
-            System.out.println("cp3");
             //Initialize the value of a pair of a set of origin and the origin itself to be 0
             final DistanceRecord tempDistance = new DistanceRecord();
             tempDistance.add(i);
@@ -244,11 +206,11 @@ public class MapManager {
 
             //Solve subproblems of size 2 to n
             for(int j = 2; j <= mSize; j++){
-                System.out.println("cp4");
                 //For all possible subsets (indexes in subset are 1-based)
                 final Set<DistanceRecord> mSubsets = generatePickyCombinations(mSize,j,i);
                 final Iterator<DistanceRecord> itr = mSubsets.iterator();
                 while(itr.hasNext()){
+
                     final DistanceRecord mSet = itr.next();
 
                     //Set value to infinite to prevent start and end at home
@@ -257,7 +219,6 @@ public class MapManager {
 
                     //Add new list for this set
                     mPath.put(mSet, new DistancePath());
-                    //					mPath.get(mSet).put(i, new LinkedList<Integer>());
 
                     //For each Element node in the set, calculate optimal path given that element node is the last destination
                     final Iterator<Integer> itr2 = mSet.iterator();
@@ -274,34 +235,23 @@ public class MapManager {
                 }
             }
 
-            System.out.println("cp5");
             //Done for one origin. If best results, record its path and distance
             final Set<DistanceRecord> temp = generateCombinations(mSize,mSize);
-            System.out.println("cp6");
             for(int j = 1; j <= mSize; j++){
                 final Iterator<DistanceRecord> itr = temp.iterator();
-                System.out.println("cp61");
                 while(itr.hasNext()){
-                    System.out.println("cp62");
                     final DistanceRecord mSet = itr.next();
-                    System.out.println("cp63");
                     final DistanceLength dl = mDistance.get(mSet);
-                    System.out.println("cp631");
-                    System.out.println("index is " + j);
-                    final Long d = dl.get(j);
-                    System.out.println("cp64");
+                    final long d = dl.getValue(j);
+                    final long f = 1;
+
                     if(bestDistance > d){
                         bestDistance = d;
                         bestPath = mPath.get(mSet).get(j);
-                        System.out.println("cp65");
                     }
                 }
             }
-            System.out.println("cp7");
 
-            //system.out.println(mDistance.toString());
-            //System.out.println("Overall Distance: " + bestDistance);
-            //System.out.println("Overall Path: " + bestPath);
         }
 
         //Convert indices to strings
@@ -309,7 +259,6 @@ public class MapManager {
             mResult.add(mtx.destinationAddresses[bestPath.get(i)-1]);
         }
 
-        System.out.println("cp8");
         return mResult;
     }
 
@@ -324,28 +273,21 @@ public class MapManager {
 
         try {
             //Grab Distance Matrix
-            System.out.println("first of getAllOptimalPath");
 
             final DistanceMatrix mtx = getDistanceMatrix(mContext, mDestinations);
 
-            System.out.println("After getAllOptimalPath");
 
             //Check if successful
             if(mtx != null){
-                System.out.println("matrix is not null");
                 //Search for optimal path
                 final DistanceResult mPath = getOptimalPath(mtx, isStartLocSet);
-
-                System.out.println("path obtained");
                 return mPath;
             } else {
-                System.out.println("mtx is null");
                 //Report error
                 return null;
             }
         } catch (final NullPointerException e)
         {
-            System.out.println("error is NPE");
             throw new LocationException(FAIL_DISTANCE_MATRIX, e);
         }
     }

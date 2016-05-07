@@ -28,6 +28,11 @@ public class DistanceRecord
         mRecord = new HashSet<Integer>(record);
     }
 
+    public DistanceRecord(DistanceRecord record)
+    {
+        mRecord = new HashSet<Integer>(record.getRecord());
+    }
+
     /**
      * add a value to the object
      * @param range value to be added
@@ -61,7 +66,7 @@ public class DistanceRecord
      * returns distance in set format
      * @return distance record in set format
      */
-    public Set<Integer> getDistance()
+    public Set<Integer> getRecord()
     {
         return mRecord;
     }
@@ -73,5 +78,27 @@ public class DistanceRecord
     public Iterator<Integer> iterator()
     {
         return mRecord.iterator();
+    }
+
+    @Override
+    public int hashCode() {
+        int x = 0;
+        x = mRecord.hashCode();
+        return x;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        // TODO Auto-generated method stub
+        if (obj instanceof DistanceRecord){
+            final DistanceRecord dr = (DistanceRecord)obj;
+            return mRecord.equals(dr.getRecord());
+        }
+        return false;
+    }
+
+    public int size()
+    {
+        return mRecord.size();
     }
 }

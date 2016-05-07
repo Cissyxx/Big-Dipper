@@ -32,10 +32,8 @@ public class DistanceLength
      * @param key to find the corresponding value
      * @return distance in Long format
      */
-    public Long get(Integer key)
+    public Long getValue(Integer key)
     {
-        System.out.println("key is " + key);
-        System.out.println("value is " + mDistance.get(key));
         return mDistance.get(key);
     }
 
@@ -48,4 +46,25 @@ public class DistanceLength
     {
         mDistance.put(key, value);
     }
+
+    public Map<Integer, Long> getDistance()
+    {
+        return mDistance;
+    }
+
+    @Override
+    public int hashCode() {
+        return mDistance.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof DistanceLength){
+            final DistanceLength dr = (DistanceLength) obj;
+            return mDistance.equals(dr.getDistance());
+        }
+        return false;
+    }
+
+
 }

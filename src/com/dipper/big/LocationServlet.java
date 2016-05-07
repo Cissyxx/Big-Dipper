@@ -52,7 +52,6 @@ public class LocationServlet extends HttpServlet {
             currentLoc = null;
         }
 
-        System.out.println(currentLoc);
         loc1 = request.getParameter("loc1");
         loc2 = request.getParameter("loc2");
         loc3 = request.getParameter("loc3");
@@ -81,13 +80,7 @@ public class LocationServlet extends HttpServlet {
             dest.add(loc5);
         }
 
-        System.out.println("dest has size " + dest.size());
         final String[] temp1 = dest.toArray(new String[dest.size()]);
-        for (int i = 0; i < dest.size(); i++)
-        {
-            System.out.println(temp1[i]);
-        }
-        System.out.println(dest.toString());
 
         // write the result to response
         PrintWriter out;
@@ -100,7 +93,7 @@ public class LocationServlet extends HttpServlet {
                 resultPath = mManager.getAllOptimalPath(dest,  isStartOriginSet);
                 resultDirections = mManager.getDirections(resultPath).getResult();
                 final List<Object> temp = new LinkedList<>();
-                temp.add(resultPath);
+                temp.add(resultPath.getResult());
                 temp.add(resultDirections);
                 out.write(new Gson().toJson(temp));
             } catch (final LocationException e){

@@ -48,5 +48,23 @@ public class DistancePath
         mPath.put(key, value);
     }
 
+    public Map<Integer, List<Integer>> getPath()
+    {
+        return mPath;
+    }
+
+    @Override
+    public int hashCode() {
+        return mPath.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof DistancePath){
+            final DistancePath dr = (DistancePath) obj;
+            return mPath.equals(dr.getPath());
+        }
+        return false;
+    }
 
 }

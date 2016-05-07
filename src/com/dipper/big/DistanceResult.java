@@ -85,4 +85,20 @@ public class DistanceResult
     {
         return mResult;
     }
+
+    @Override
+    public int hashCode() {
+        return mResult.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof DistanceResult){
+            final DistanceResult dr = (DistanceResult) obj;
+            return mResult.equals(dr.getResult());
+        }
+        return false;
+    }
+
+
 }
