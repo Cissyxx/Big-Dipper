@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import com.dipper.big.DistanceResult;
+import com.dipper.big.Path;
 import com.dipper.big.LocationException;
 import com.dipper.big.MapManager;
 
@@ -37,8 +37,8 @@ public class MapManagerTest
     @Test
     public void test_getAllOptimalPath() throws LocationException
     {
-        final DistanceResult mResult = new DistanceResult();
-        final DistanceResult destinations = new DistanceResult();
+        final Path mResult = new Path();
+        final Path destinations = new Path();
         Mockito.doReturn(mResult).when(mManager.getAllOptimalPath(destinations, true));
         Assert.assertEquals(mResult, mResult);
     }

@@ -59,7 +59,7 @@ public class LocationServlet extends HttpServlet {
         loc5 = request.getParameter("loc5");
 
         final MapManager mManager = MapManager.getInstance(API_KEY);
-        final DistanceResult dest = new DistanceResult();
+        final Path dest = new Path();
         if(currentLoc != null && !currentLoc.isEmpty()){
             dest.add(currentLoc);
             isStartOriginSet = true;
@@ -85,15 +85,15 @@ public class LocationServlet extends HttpServlet {
         // write the result to response
         PrintWriter out;
         final String output;
-        DistanceResult resultPath = null;
+        Path resultPath = null;
         List<String> resultDirections = null;
         try{
             out = response.getWriter();
             try {
                 resultPath = mManager.getAllOptimalPath(dest,  isStartOriginSet);
-                resultDirections = mManager.getDirections(resultPath).getResult();
+                resultDirections = mManager.getDirections(resultPath).getPath();
                 final List<Object> temp = new LinkedList<>();
-                temp.add(resultPath.getResult());
+                temp.add(resultPath.getPath());
                 temp.add(resultDirections);
                 out.write(new Gson().toJson(temp));
             } catch (final LocationException e){

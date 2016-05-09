@@ -7,25 +7,25 @@ import java.util.Map;
 /**
  * user defined class on paths
  */
-public class DistancePath
+public class Itinerary
 {
-    private final Map<Integer, List<Integer>> mPath;
+    private final Map<Integer, List<Integer>> mItinerary;
 
     /**
      * default constructor
      */
-    public DistancePath()
+    public Itinerary()
     {
-        mPath = new HashMap<Integer, List<Integer>>();
+        mItinerary = new HashMap<Integer, List<Integer>>();
     }
 
     /**
      * constructor with a map
      * @param path map object
      */
-    public DistancePath(Map<Integer, List<Integer>> path)
+    public Itinerary(Map<Integer, List<Integer>> path)
     {
-        mPath = new HashMap<Integer, List<Integer>>(path);
+        mItinerary = new HashMap<Integer, List<Integer>>(path);
     }
 
     /**
@@ -35,7 +35,7 @@ public class DistancePath
      */
     public List<Integer> get(Integer key)
     {
-        return mPath.get(key);
+        return mItinerary.get(key);
     }
 
     /**
@@ -45,24 +45,24 @@ public class DistancePath
      */
     public void put(Integer key, List<Integer> value)
     {
-        mPath.put(key, value);
+        mItinerary.put(key, value);
     }
 
-    public Map<Integer, List<Integer>> getPath()
+    public Map<Integer, List<Integer>> getItinerary()
     {
-        return mPath;
+        return mItinerary;
     }
 
     @Override
     public int hashCode() {
-        return mPath.hashCode();
+        return mItinerary.hashCode();
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof DistancePath){
-            final DistancePath dr = (DistancePath) obj;
-            return mPath.equals(dr.getPath());
+        if (obj instanceof Itinerary){
+            final Itinerary dr = (Itinerary) obj;
+            return mItinerary.equals(dr.getItinerary());
         }
         return false;
     }

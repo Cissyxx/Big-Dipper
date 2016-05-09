@@ -7,14 +7,14 @@ import java.util.Set;
 /**
  * user defined class to store different distance record
  */
-public class DistanceRecord
+public class Record
 {
     private final Set<Integer> mRecord;
 
     /**
      * default constructor
      */
-    public DistanceRecord()
+    public Record()
     {
         mRecord = new HashSet<Integer>();
     }
@@ -23,12 +23,12 @@ public class DistanceRecord
      * constructor with Set<Integer>
      * @param record set of integer
      */
-    public DistanceRecord(Set<Integer> record)
+    public Record(Set<Integer> record)
     {
         mRecord = new HashSet<Integer>(record);
     }
 
-    public DistanceRecord(DistanceRecord record)
+    public Record(Record record)
     {
         mRecord = new HashSet<Integer>(record.getRecord());
     }
@@ -90,8 +90,8 @@ public class DistanceRecord
     @Override
     public boolean equals(Object obj) {
         // TODO Auto-generated method stub
-        if (obj instanceof DistanceRecord){
-            final DistanceRecord dr = (DistanceRecord)obj;
+        if (obj instanceof Record){
+            final Record dr = (Record)obj;
             return mRecord.equals(dr.getRecord());
         }
         return false;

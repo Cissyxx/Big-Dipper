@@ -6,14 +6,14 @@ import java.util.Map;
 /**
  * user defined class to store corresponding distance for each location
  */
-public class DistanceLength
+public class Distance
 {
     private final Map<Integer, Long> mDistance;
 
     /**
      * default constructor
      */
-    public DistanceLength()
+    public Distance()
     {
         mDistance = new HashMap<Integer, Long>();
     }
@@ -22,7 +22,7 @@ public class DistanceLength
      * constructor with Map<Integer, Long>
      * @param distance
      */
-    public DistanceLength(Map<Integer, Long> distance)
+    public Distance(Map<Integer, Long> distance)
     {
         mDistance = new HashMap<Integer, Long>(distance);
     }
@@ -59,8 +59,8 @@ public class DistanceLength
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof DistanceLength){
-            final DistanceLength dr = (DistanceLength) obj;
+        if (obj instanceof Distance){
+            final Distance dr = (Distance) obj;
             return mDistance.equals(dr.getDistance());
         }
         return false;

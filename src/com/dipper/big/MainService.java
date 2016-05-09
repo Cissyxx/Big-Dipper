@@ -41,7 +41,7 @@ public class MainService {
         //Initialization
         mManager = MapManager.getInstance(API_KEY);
 
-        final DistanceResult destinations = new DistanceResult();
+        final Path destinations = new Path();
         destinations.add("central park");
         destinations.add("high line");
         destinations.add("times square");

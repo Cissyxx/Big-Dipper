@@ -7,26 +7,26 @@ import java.util.List;
 /**
  * User defined class specifically for storing travel order
  */
-public class DistanceResult
+public class Path
 {
 
-    private final List<String> mResult;
+    private final List<String> mPath;
 
     /**
      * Default Constructor
      */
-    public DistanceResult()
+    public Path()
     {
-        mResult = new LinkedList<String>();
+        mPath = new LinkedList<String>();
     }
 
     /**
      * Constructor with a List<String>
      * @param result list of string
      */
-    public DistanceResult(List<String> result)
+    public Path(List<String> result)
     {
-        mResult = new LinkedList<String>(result);
+        mPath = new LinkedList<String>(result);
     }
 
     /**
@@ -35,7 +35,7 @@ public class DistanceResult
      */
     public void add(String place)
     {
-        mResult.add(place);
+        mPath.add(place);
     }
 
     /**
@@ -44,7 +44,7 @@ public class DistanceResult
      */
     public int size()
     {
-        return mResult.size();
+        return mPath.size();
     }
 
     /**
@@ -54,7 +54,7 @@ public class DistanceResult
      */
     public String get(int index)
     {
-        return mResult.get(index);
+        return mPath.get(index);
     }
 
     /**
@@ -65,7 +65,7 @@ public class DistanceResult
      */
     public List<String> subList(int fromIndex, int toIndex)
     {
-        return mResult.subList(fromIndex, toIndex);
+        return mPath.subList(fromIndex, toIndex);
     }
 
     /**
@@ -74,28 +74,28 @@ public class DistanceResult
      * @return string array
      */
     public String[] toArray(String[] strings) {
-        return mResult.toArray(strings);
+        return mPath.toArray(strings);
     }
 
     /**
      * return the String list
      * @return String list that contains all destinations in proper order
      */
-    public List<String> getResult()
+    public List<String> getPath()
     {
-        return mResult;
+        return mPath;
     }
 
     @Override
     public int hashCode() {
-        return mResult.hashCode();
+        return mPath.hashCode();
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof DistanceResult){
-            final DistanceResult dr = (DistanceResult) obj;
-            return mResult.equals(dr.getResult());
+        if (obj instanceof Path){
+            final Path dr = (Path) obj;
+            return mPath.equals(dr.getPath());
         }
         return false;
     }
